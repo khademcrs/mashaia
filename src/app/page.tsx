@@ -1300,20 +1300,22 @@ export default function Home() {
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                   <div className="form-group" style={{ flex: '2 1 200px', marginBottom: 0 }}>
                     <label>الموكب / الحسينية / المركز (اختياري)</label>
-                    <input 
-                      type="text" 
+                    <textarea 
                       value={editingMoukeb.name}
                       onChange={e => setEditingMoukeb({ ...editingMoukeb, name: e.target.value })} 
                       placeholder="(اتركه فارغاً إذا كان نقطة خدمة فردية)"
+                      rows={2}
+                      style={{ resize: 'vertical', minHeight: '60px' }}
                     />
                   </div>
                   <div className="form-group" style={{ flex: '1 1 120px', marginBottom: 0 }}>
                     <label>البلدة (اختياري)</label>
-                    <input 
-                      type="text" 
+                    <textarea 
                       value={editingMoukeb.country || ''}
                       onChange={e => setEditingMoukeb({ ...editingMoukeb, country: e.target.value })} 
                       placeholder="مثل: الأحساء"
+                      rows={1}
+                      style={{ resize: 'vertical', minHeight: '45px' }}
                     />
                   </div>
                 </div>
@@ -1455,20 +1457,22 @@ export default function Home() {
                   <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.8rem', flexWrap: 'wrap' }}>
                     <div className="form-group" style={{ flex: '2 1 200px', marginBottom: 0 }}>
                       <label style={{ fontSize: '0.8rem' }}>الموكب / الحسينية / المركز (اختياري)</label>
-                      <input 
-                        type="text" 
+                      <textarea 
                         value={formNames}
                         onChange={e => setFormNames(e.target.value)} 
                         placeholder="(اتركه فارغاً إذا كان نقطة خدمة فردية)"
+                        rows={2}
+                        style={{ resize: 'vertical', minHeight: '60px' }}
                       />
                     </div>
                     <div className="form-group" style={{ flex: '1 1 120px', marginBottom: 0 }}>
                       <label style={{ fontSize: '0.8rem' }}>البلدة (اختياري)</label>
-                      <input 
-                        type="text" 
+                      <textarea 
                         value={formCountry}
                         onChange={e => setFormCountry(e.target.value)} 
                         placeholder="مثل: الأحساء"
+                        rows={1}
+                        style={{ resize: 'vertical', minHeight: '45px' }}
                       />
                     </div>
                   </div>
