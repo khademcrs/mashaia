@@ -253,9 +253,11 @@ export default function Home() {
   const handleIgnoreReport = async (id: string) => {
     if (!confirm("هل أنت متأكد من تجاهل وحذف هذا التعديل المقترح؟")) return;
     try {
-      const res = await fetch(`/api/reports?id=${id}&adminPassword=${adminPassword}`, {
+      const res = await fetch(`/api/reports?adminPassword=${adminPassword}`, {
         method: "DELETE",
-        headers: { "X-Admin-Password": adminPassword }, cache: "no-store"
+        headers: { "Content-Type": "application/json", "X-Admin-Password": adminPassword },
+        body: JSON.stringify({ id, action: 'ignore' }),
+        cache: "no-store"
       });
       if (res.ok) {
         fetchReports();
@@ -358,9 +360,11 @@ export default function Home() {
   const handleRejectPending = async (id: string) => {
     if (!confirm("هل أنت متأكد من رفض هذا الطلب وحذفه نهائياً؟")) return;
     try {
-      const res = await fetch(`/api/moukebs/pending?id=${id}&adminPassword=${adminPassword}`, {
+      const res = await fetch(`/api/moukebs/pending?adminPassword=${adminPassword}`, {
         method: "DELETE",
-        headers: { "X-Admin-Password": adminPassword }, cache: "no-store"
+        headers: { "Content-Type": "application/json", "X-Admin-Password": adminPassword },
+        body: JSON.stringify({ id, action: 'reject' }),
+        cache: "no-store"
       });
       if (res.ok) {
         fetchPendingMoukebs();
@@ -374,11 +378,13 @@ export default function Home() {
     if (!confirm(`هل أنت متأكد من حذف العمود رقم ${column} بالكامل؟`)) return;
 
     try {
-      const res = await fetch(`/api/moukebs?column=${column}&adminPassword=${adminPassword}`, {
+      const res = await fetch(`/api/moukebs?adminPassword=${adminPassword}`, {
         method: "DELETE",
         headers: {
+          "Content-Type": "application/json",
           "X-Admin-Password": adminPassword
-        }
+        },
+        body: JSON.stringify({ column })
       });
       if (res.ok) {
         alert("تم حذف الموكب بنجاح!");
