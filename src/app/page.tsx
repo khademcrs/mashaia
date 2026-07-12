@@ -1292,10 +1292,48 @@ export default function Home() {
                 <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
                 </button>
-                <h2 className="text-gradient" style={{ margin: 0 }}>تعديل خدمة في عمود {editingMoukeb.column}</h2>
+                <h2 className="text-gradient" style={{ margin: 0 }}>تعديل الموكب والخدمات</h2>
               </div>
               
               <form onSubmit={handleEditSubmit}>
+                <div className="form-group" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', marginBottom: '0.8rem' }}>
+                  <label style={{ fontSize: '0.9rem', margin: 0, color: 'var(--text-color)', fontWeight: 'bold' }}>رقم العمود *</label>
+                  <input 
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    maxLength={4}
+                    required 
+                    value={editingMoukeb.column || ''}
+                    onChange={e => {
+                      const val = e.target.value.replace(/[^0-9]/g, '');
+                      setEditingMoukeb({ ...editingMoukeb, column: val ? parseInt(val) : 0 });
+                    }} 
+                    placeholder="0000"
+                    style={{ 
+                      fontSize: '1.5rem', 
+                      textAlign: 'center', 
+                      letterSpacing: '2px',
+                      padding: '0.4rem',
+                      borderRadius: '12px',
+                      background: 'rgba(255,255,255,0.02)',
+                      color: editingMoukeb.column ? '#ff5e62' : 'rgba(255,255,255,0.3)',
+                      textShadow: editingMoukeb.column ? '0 0 15px rgba(255,94,98,0.5)' : 'none',
+                      border: editingMoukeb.column ? '2px solid var(--accent-color)' : '2px dashed rgba(255,255,255,0.1)',
+                      boxShadow: editingMoukeb.column ? '0 0 20px rgba(255, 0, 85, 0.2)' : 'none',
+                      fontWeight: 'bold',
+                      width: '100%',
+                      maxWidth: '150px',
+                      margin: '0',
+                      transition: 'all 0.3s ease',
+                      outline: 'none'
+                    }}
+                    onFocus={e => e.target.style.border = '2px solid var(--accent-color)'}
+                    onBlur={e => {
+                      e.target.style.border = editingMoukeb.column ? '2px solid var(--accent-color)' : '2px dashed rgba(255,255,255,0.1)';
+                    }}
+                  />
+                </div>
                 
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                   <div className="form-group" style={{ flex: '2 1 200px', marginBottom: 0 }}>
