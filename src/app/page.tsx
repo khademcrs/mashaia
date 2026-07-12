@@ -1304,8 +1304,8 @@ export default function Home() {
                       value={editingMoukeb.name}
                       onChange={e => setEditingMoukeb({ ...editingMoukeb, name: e.target.value })} 
                       placeholder="(اتركه فارغاً إذا كان نقطة خدمة فردية)"
-                      rows={2}
-                      style={{ resize: 'vertical', minHeight: '60px' }}
+                      rows={1}
+                      style={{ resize: 'vertical', minHeight: '40px', fontSize: '0.9rem', padding: '0.6rem' }}
                     />
                   </div>
                   <div className="form-group" style={{ flex: '1 1 120px', marginBottom: 0 }}>
@@ -1313,9 +1313,9 @@ export default function Home() {
                     <textarea 
                       value={editingMoukeb.country || ''}
                       onChange={e => setEditingMoukeb({ ...editingMoukeb, country: e.target.value })} 
-                      placeholder="مثل: الأحساء"
+                      placeholder="مثل: البحرين"
                       rows={1}
-                      style={{ resize: 'vertical', minHeight: '45px' }}
+                      style={{ resize: 'vertical', minHeight: '40px', fontSize: '0.9rem', padding: '0.6rem' }}
                     />
                   </div>
                 </div>
@@ -1461,8 +1461,8 @@ export default function Home() {
                         value={formNames}
                         onChange={e => setFormNames(e.target.value)} 
                         placeholder="(اتركه فارغاً إذا كان نقطة خدمة فردية)"
-                        rows={2}
-                        style={{ resize: 'vertical', minHeight: '60px' }}
+                        rows={1}
+                        style={{ resize: 'vertical', minHeight: '40px', fontSize: '0.9rem', padding: '0.6rem' }}
                       />
                     </div>
                     <div className="form-group" style={{ flex: '1 1 120px', marginBottom: 0 }}>
@@ -1470,9 +1470,9 @@ export default function Home() {
                       <textarea 
                         value={formCountry}
                         onChange={e => setFormCountry(e.target.value)} 
-                        placeholder="مثل: الأحساء"
+                        placeholder="مثل: البحرين"
                         rows={1}
-                        style={{ resize: 'vertical', minHeight: '45px' }}
+                        style={{ resize: 'vertical', minHeight: '40px', fontSize: '0.9rem', padding: '0.6rem' }}
                       />
                     </div>
                   </div>
