@@ -1321,7 +1321,6 @@ export default function Home() {
                 </div>
                 
                 <div className="form-group">
-                  <label style={{ marginBottom: '1rem', display: 'block', color: 'var(--text-color)' }}>الخدمات المتوفرة:</label>
                   
                   {Object.keys(knownServices).map(category => (
                     <div key={category} style={{ marginBottom: '1.2rem' }}>
@@ -1414,8 +1413,8 @@ export default function Home() {
                 </div>
                 
                 <form onSubmit={handleAddMoukeb}>
-                  <div className="form-group" style={{ textAlign: 'center', marginBottom: '0.8rem' }}>
-                    <label style={{ fontSize: '0.85rem', marginBottom: '0.3rem', display: 'block', color: 'var(--text-color)' }}>رقم العمود *</label>
+                  <div className="form-group" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', marginBottom: '0.8rem' }}>
+                    <label style={{ fontSize: '0.9rem', margin: 0, color: 'var(--text-color)', fontWeight: 'bold' }}>رقم العمود *</label>
                     <input 
                       type="text"
                       inputMode="numeric"
@@ -1441,9 +1440,8 @@ export default function Home() {
                         boxShadow: formColumn ? '0 0 20px rgba(255, 0, 85, 0.2)' : 'none',
                         fontWeight: 'bold',
                         width: '100%',
-                        maxWidth: '180px',
-                        margin: '0 auto',
-                        display: 'block',
+                        maxWidth: '150px',
+                        margin: '0',
                         transition: 'all 0.3s ease',
                         outline: 'none'
                       }}
@@ -1478,7 +1476,6 @@ export default function Home() {
                   </div>
                   
                   <div className="form-group">
-                    <label style={{ marginBottom: '0.8rem', display: 'block', color: 'var(--text-color)', fontSize: '0.9rem' }}>الخدمات المتوفرة:</label>
                   
                   {Object.keys(knownServices).map(category => (
                     <div key={category} style={{ marginBottom: '0.8rem' }}>
