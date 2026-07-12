@@ -8,7 +8,7 @@
   --card-hover: rgba(30, 30, 30, 0.9);
   --border-color: rgba(255, 0, 0, 0.2);
   --glass-bg: rgba(5, 5, 5, 0.85);
-  --glass-border: rgba(255, 0, 0, 0.15);
+  --glass-border: rgba(255, 0, 0, 0.35); /* Clearer stroke */
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   --glow: 0 0 15px rgba(255, 0, 0, 0.4);
 }
@@ -19,6 +19,11 @@
   padding: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 body {
   font-family: 'Cairo', sans-serif;
   background-color: var(--bg-color);
@@ -26,7 +31,6 @@ body {
   direction: rtl;
   line-height: 1.6;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 /* Base UI Elements */

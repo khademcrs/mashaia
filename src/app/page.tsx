@@ -404,7 +404,7 @@ export default function Home() {
     if (!finalName && services.length === 1 && allKnownServices.includes(services[0])) {
       finalName = services[0];
     } else if (!finalName) {
-      finalName = "موكب حسيني";
+      finalName = "موكب أو حسينية";
     }
 
     const newNames = [...originalData.names];
@@ -533,7 +533,7 @@ export default function Home() {
     let matchesFilter = true;
     if (selectedFilters.length > 0) {
       matchesFilter = selectedFilters.every(ft => {
-        if (ft === "موكب حسيني") {
+        if (ft === "موكب أو حسينية") {
           return col.names.some((n: string) => !allKnownServices.includes(n));
         } else {
           return col.names.includes(ft) || (!!col.note && col.note.includes(ft));
@@ -912,13 +912,13 @@ export default function Home() {
                                     </span>
                                   )}
                                   {services.length > 0 && (
-                                    <div style={{ display: 'flex', gap: '0.3rem', marginRight: '0.5rem', alignItems: 'center' }}>
+                                    <div style={{ display: 'flex', gap: '0.3rem', marginRight: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
                                       {services.map((srv: string, i: number) => (
-                                        <div key={i} title={srv} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--accent-color)', fontSize: '0.85rem', background: 'rgba(255, 0, 0, 0.05)', padding: '0.2rem 0.6rem', borderRadius: '15px', border: '1px solid rgba(255, 0, 0, 0.2)' }}>
-                                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '16px', height: '16px' }}>
+                                        <div key={i} title={srv} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--accent-color)', fontSize: '0.75rem', background: 'rgba(255, 0, 0, 0.05)', padding: '0.15rem 0.5rem', borderRadius: '15px', border: '1px solid rgba(255, 0, 0, 0.2)' }}>
+                                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '14px', height: '14px' }}>
                                             {getServiceIcon(srv)}
                                           </div>
-                                          <span>{srv}</span>
+                                          <span style={{ whiteSpace: 'nowrap' }}>{srv}</span>
                                         </div>
                                       ))}
                                     </div>
@@ -946,10 +946,20 @@ export default function Home() {
                              }
                              
                              const normalized = rawIcons.map(n => {
-                               if (["دورات مياه", "مبيت", "ضيافة", "غسيل ملابس"].includes(n) || allKnownServices.includes(n)) {
-                                 return n;
-                               }
-                               return "موكب حسيني";
+                               if (allKnownServices.includes(n) || ["دورات مياه"].includes(n)) return n;
+                               if (n.includes("مياه")) return "مياه شرب";
+                               if (n.includes("مبيت")) return "مبيت";
+                               if (n.includes("ضيافة")) return "ضيافة";
+                               if (n.includes("غسيل")) return "غسيل ملابس";
+                               if (n.includes("طبية") || n.includes("علاج")) return "مفرزة طبية";
+                               if (n.includes("مفقودين")) return "مركز المفقودين";
+                               if (n.includes("اتصالات")) return "مركز اتصالات";
+                               if (n.includes("استفتاءات")) return "استفتاءات شرعية";
+                               if (n.includes("صيانة") || n.includes("تصليح")) return "صيانة عربات";
+                               if (n.includes("خياطة")) return "خياطة";
+                               if (n.includes("شحن") || n.includes("هواتف")) return "شحن هواتف";
+                               if (n.includes("إنترنت") || n.includes("انترنت")) return "إنترنت مجاني";
+                               return "موكب أو حسينية";
                              });
                              
                              const counts: Record<string, number> = {};
@@ -1047,13 +1057,13 @@ export default function Home() {
                 </button>
               </div>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {Object.keys(knownServices).map(category => (
-                  <div key={category} style={{ background: 'rgba(0,0,0,0.2)', padding: '1.5rem', borderRadius: '15px' }}>
+                  <div key={category} style={{ background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '15px' }}>
                     <h3 style={{ color: 'var(--accent-color)', marginBottom: '1rem', fontSize: '1.1rem' }}>{category}</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                       {knownServices[category].map(srv => (
-                        <div key={srv} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem 1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                        <div key={srv} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem 0.8rem', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.05)' }}>
                           <span style={{ fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <span style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-color)' }}>{getServiceIcon(srv)}</span>
                             {srv}
@@ -1187,8 +1197,8 @@ export default function Home() {
             <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', textAlign: 'center', fontSize: '0.9rem' }}>
               يمكنك تحديد أكثر من خدمة، وسيعرض النظام الأعمدة التي تحتوي على <strong>جميع</strong> الخدمات المحددة معاً.
             </p>
-            <div className="filter-options-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.8rem' }}>
-              {["موكب حسيني", ...allKnownServices, "دورات مياه", "مبيت", "ضيافة", "غسيل ملابس"].map(ft => (
+            <div className="filter-options-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
+              {["موكب أو حسينية", ...allKnownServices, "دورات مياه", "مبيت", "ضيافة", "غسيل ملابس"].map(ft => (
                 <button 
                   key={ft}
                   className={`filter-pill ${tempFilters.includes(ft) ? 'active' : ''}`}
@@ -1196,7 +1206,7 @@ export default function Home() {
                     if (tempFilters.includes(ft)) setTempFilters(tempFilters.filter(f => f !== ft));
                     else setTempFilters([...tempFilters, ft]);
                   }}
-                  style={{ width: '100%', justifyContent: 'flex-start', padding: '0.6rem' }}
+                  style={{ width: 'auto', padding: '0.4rem 0.8rem', borderRadius: '15px' }}
                 >
                   {getServiceIcon(ft)}
                   <span style={{ fontSize: '0.85rem' }}>{ft}</span>
@@ -1289,7 +1299,7 @@ export default function Home() {
                 
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                   <div className="form-group" style={{ flex: '2 1 200px', marginBottom: 0 }}>
-                    <label>اسم الموكب / المركز (اختياري)</label>
+                    <label>الموكب / الحسينية / المركز (اختياري)</label>
                     <input 
                       type="text" 
                       value={editingMoukeb.name}
@@ -1402,8 +1412,8 @@ export default function Home() {
                 </div>
                 
                 <form onSubmit={handleAddMoukeb}>
-                  <div className="form-group" style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                    <label style={{ fontSize: '1.2rem', marginBottom: '1rem', display: 'block', color: 'var(--text-color)' }}>رقم العمود *</label>
+                  <div className="form-group" style={{ textAlign: 'center', marginBottom: '0.8rem' }}>
+                    <label style={{ fontSize: '0.85rem', marginBottom: '0.3rem', display: 'block', color: 'var(--text-color)' }}>رقم العمود *</label>
                     <input 
                       type="text"
                       inputMode="numeric"
@@ -1417,11 +1427,11 @@ export default function Home() {
                       }} 
                       placeholder="0000"
                       style={{ 
-                        fontSize: '3rem', 
+                        fontSize: '1.5rem', 
                         textAlign: 'center', 
-                        letterSpacing: '8px',
-                        padding: '1rem',
-                        borderRadius: '20px',
+                        letterSpacing: '2px',
+                        padding: '0.4rem',
+                        borderRadius: '12px',
                         background: 'rgba(255,255,255,0.02)',
                         color: formColumn ? '#ff5e62' : 'rgba(255,255,255,0.3)',
                         textShadow: formColumn ? '0 0 15px rgba(255,94,98,0.5)' : 'none',
@@ -1429,7 +1439,7 @@ export default function Home() {
                         boxShadow: formColumn ? '0 0 20px rgba(255, 0, 85, 0.2)' : 'none',
                         fontWeight: 'bold',
                         width: '100%',
-                        maxWidth: '250px',
+                        maxWidth: '180px',
                         margin: '0 auto',
                         display: 'block',
                         transition: 'all 0.3s ease',
@@ -1442,9 +1452,9 @@ export default function Home() {
                     />
                   </div>
                   
-                  <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.8rem', flexWrap: 'wrap' }}>
                     <div className="form-group" style={{ flex: '2 1 200px', marginBottom: 0 }}>
-                      <label>اسم الموكب / المركز (اختياري)</label>
+                      <label style={{ fontSize: '0.8rem' }}>الموكب / الحسينية / المركز (اختياري)</label>
                       <input 
                         type="text" 
                         value={formNames}
@@ -1453,7 +1463,7 @@ export default function Home() {
                       />
                     </div>
                     <div className="form-group" style={{ flex: '1 1 120px', marginBottom: 0 }}>
-                      <label>البلدة (اختياري)</label>
+                      <label style={{ fontSize: '0.8rem' }}>البلدة (اختياري)</label>
                       <input 
                         type="text" 
                         value={formCountry}
@@ -1464,25 +1474,25 @@ export default function Home() {
                   </div>
                   
                   <div className="form-group">
-                    <label style={{ marginBottom: '1rem', display: 'block', color: 'var(--text-color)' }}>الخدمات المتوفرة:</label>
+                    <label style={{ marginBottom: '0.8rem', display: 'block', color: 'var(--text-color)', fontSize: '0.9rem' }}>الخدمات المتوفرة:</label>
                   
                   {Object.keys(knownServices).map(category => (
-                    <div key={category} style={{ marginBottom: '1.2rem' }}>
-                      <div style={{ fontSize: '0.85rem', color: 'var(--accent-color)', marginBottom: '0.5rem' }}>{category}:</div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <div key={category} style={{ marginBottom: '0.8rem' }}>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--accent-color)', marginBottom: '0.4rem' }}>{category}:</div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                         {knownServices[category].map(srv => (
                           <button 
                             type="button" 
                             key={srv}
                             onClick={() => handleToggleService(srv)}
                             style={{
-                              padding: '0.4rem 0.8rem', borderRadius: '20px', border: '1px solid var(--accent-color)',
+                              padding: '0.25rem 0.5rem', borderRadius: '15px', border: '1px solid var(--accent-color)',
                               background: formMoukebServices.includes(srv) ? 'var(--accent-color)' : 'transparent',
                               color: formMoukebServices.includes(srv) ? 'white' : 'var(--text-color)',
-                              cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.85rem', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '0.4rem'
+                              cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.75rem', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '0.3rem'
                             }}
                           >
-                            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '16px', height: '16px' }}>{getServiceIcon(srv)}</span>
+                            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '12px', height: '12px' }}>{getServiceIcon(srv)}</span>
                             {srv}
                           </button>
                         ))}
@@ -1723,30 +1733,17 @@ export default function Home() {
           flex-direction: column;
           overflow: hidden;
           position: relative;
+          border: 2px solid var(--glass-border) !important;
         }
-        
-        .column-card::before {
-          content: "";
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          border-radius: 20px;
-          padding: 2px;
-          background: var(--gradient-brand);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
+
 
         .column-card:hover {
           transform: translateY(-8px) scale(1.02);
           background: var(--card-hover);
+          border-color: rgba(255, 0, 0, 0.6) !important;
+          box-shadow: 0 4px 20px rgba(255, 0, 0, 0.2);
         }
-        
-        .column-card:hover::before {
-          opacity: 1;
-        }
+
 
         .column-card.expanded {
           grid-column: 1 / -1;
@@ -1754,10 +1751,10 @@ export default function Home() {
           align-items: stretch;
           transform: none;
           background: var(--card-hover);
+          border-color: var(--accent-color) !important;
+          box-shadow: 0 4px 25px rgba(255, 0, 0, 0.35);
         }
-        .column-card.expanded::before {
-          opacity: 1;
-        }
+
 
         @media (max-width: 600px) {
           .column-card.expanded {
@@ -1915,8 +1912,10 @@ export default function Home() {
         .modal-content {
           width: 100%;
           max-width: 500px;
-          padding: 2.5rem;
-          border-radius: 24px;
+          padding: 1.5rem;
+          border-radius: 20px;
+          max-height: 85vh;
+          overflow-y: auto;
         }
 
         .form-group {
@@ -2040,8 +2039,168 @@ export default function Home() {
         }
         
         @media (max-width: 500px) {
+          .app-header {
+            padding: 0.8rem 1rem;
+          }
+          .header-top {
+            gap: 0.5rem;
+          }
+          :global(.brand-logo) {
+            height: 28px !important;
+            width: 28px !important;
+            min-width: 28px !important;
+          }
+          h1 {
+            font-size: 1.1rem !important;
+            font-weight: 700 !important;
+          }
+          :global(.secondary-logo) {
+            height: 10px !important;
+            margin-top: -3px !important;
+          }
+          .primary-btn-outline {
+            padding: 0.4rem 0.8rem !important;
+            font-size: 0.75rem !important;
+            border-radius: 8px !important;
+          }
+          .hero-section p {
+            font-size: 0.95rem !important;
+            line-height: 1.6;
+          }
+          .search-input {
+            padding: 0.8rem 1rem 0.8rem 2.5rem !important;
+            font-size: 0.9rem !important;
+            border-radius: 12px !important;
+          }
           .service-grid {
             grid-template-columns: repeat(2, 1fr);
+          }
+          .columns-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            gap: 0.5rem !important;
+            width: 100% !important;
+          }
+          .column-card {
+            padding: 0 !important;
+            border-radius: 10px !important;
+            min-width: 0 !important;
+          }
+          .col-header {
+            min-width: unset !important;
+            padding: 1rem 0 !important;
+          }
+          .col-label {
+            font-size: 0.8rem !important;
+            margin-bottom: 0.2rem !important;
+          }
+          .col-number {
+            font-size: 2rem !important;
+          }
+          .col-number-block {
+            padding: 0.5rem !important;
+            min-width: unset !important;
+          }
+          .modal-content {
+            padding: 0.8rem !important;
+          }
+          .card-title {
+            font-size: 0.65rem !important;
+            opacity: 0.8;
+          }
+          .hero-logo {
+            width: 60px !important;
+            height: 60px !important;
+          }
+          
+          /* Uniform Card Layout on Mobile (Closed & Expanded) */
+          .card-top-row {
+            flex-direction: column !important;
+            min-height: unset !important;
+          }
+          .card-top-row .col-number-block {
+            order: -1 !important; /* Force Number Block to the TOP */
+            border-right: none !important;
+            border-bottom: none !important;
+            flex-direction: column !important; /* Stack: Label -> Number -> Icons */
+            gap: 0.1rem !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 0.8rem 0.2rem !important; /* Consistent padding for uniform height */
+            width: 100% !important;
+            background: transparent !important;
+          }
+          .column-card.expanded .col-number-block {
+            border-bottom: 1px solid rgba(255,0,0,0.2) !important;
+            padding: 0.5rem !important;
+            background: rgba(0,0,0,0.3) !important;
+          }
+          .card-top-row .col-label {
+            margin-bottom: 0 !important;
+            font-size: 0.75rem !important;
+            color: var(--text-muted) !important;
+          }
+          .card-top-row .col-number {
+            font-size: 1.6rem !important;
+            line-height: 1.1 !important;
+          }
+          
+          /* Mini closed icons in one row */
+          .col-closed-icons {
+            flex-direction: row !important;
+            flex-wrap: nowrap !important; /* Force one row */
+            gap: 0.15rem !important;
+            margin-top: 0.2rem !important;
+            justify-content: center !important;
+            max-width: 100% !important;
+            overflow: visible !important;
+          }
+          .closed-icon-wrapper {
+            padding: 0 !important;
+            background: transparent !important;
+            border: none !important;
+          }
+          .closed-icon-wrapper svg {
+            width: 10px !important;
+            height: 10px !important;
+          }
+          .icon-badge {
+            display: flex !important;
+            font-size: 0.55rem !important;
+            width: 12px !important;
+            height: 12px !important;
+            min-width: 12px !important;
+            top: -4px !important;
+            right: -4px !important;
+            background: #6b7280 !important;
+            color: white !important;
+            border: 1px solid #4b5563 !important;
+          }
+          .closed-icon-wrapper-more {
+            font-size: 0.6rem !important;
+            padding: 0 0.1rem !important;
+          }
+
+          /* Expanded Card Specifics */
+          .moukeb-unified-text {
+            font-size: 0.85rem !important; /* Even smaller font */
+            font-weight: 700 !important;
+          }
+          .moukeb-unified-title {
+            gap: 0.4rem !important;
+          }
+          .moukeb-unified-title > div[style*="border"] {
+            font-size: 0.6rem !important; /* Even smaller service tags */
+            padding: 0.15rem 0.3rem !important;
+            border-radius: 6px !important;
+            gap: 0.2rem !important;
+          }
+          .moukeb-unified-title > div[style*="border"] svg {
+            width: 10px !important;
+            height: 10px !important;
+          }
+          .moukeb-unified-block {
+            padding: 0.8rem 0.5rem !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           }
         }
 
@@ -2126,7 +2285,7 @@ export default function Home() {
         
         .col-details.smooth-expand {
           border-top: 1px solid var(--border-color);
-          padding: 1.5rem;
+          padding: 1rem;
           background: rgba(0, 0, 0, 0.2);
         }
         
@@ -2158,27 +2317,27 @@ export default function Home() {
           flex-direction: column;
           background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), rgba(170, 0, 0, 0.15));
           border: 1px solid rgba(255, 0, 0, 0.3);
-          border-radius: 16px;
+          border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-          padding: 0.8rem 1.2rem;
-          gap: 0.4rem;
+          padding: 0.5rem 0.8rem;
+          gap: 0.3rem;
         }
         
         .moukeb-unified-title {
           display: flex;
           align-items: center;
-          gap: 0.8rem;
+          gap: 0.5rem;
           padding: 0;
           background: transparent;
           border-bottom: none;
         }
         
         .moukeb-unified-text {
-          font-size: 1.1rem;
-          font-weight: 800;
+          font-size: 0.8rem;
+          font-weight: 700;
           color: white;
-          line-height: 1.4;
+          flex-grow: 1;
         }
         
         .moukeb-unified-details {
@@ -2425,20 +2584,21 @@ export default function Home() {
         
         .icon-badge {
           position: absolute;
-          top: -6px;
-          right: -6px;
-          background: #111; /* Dark background to not overlap transparently */
-          color: #9ca3af; /* Gray */
-          border: 1px solid #9ca3af;
-          font-size: 0.6rem;
+          top: -4px;
+          right: -4px;
+          background: #6b7280;
+          color: white;
+          border: 1px solid #4b5563;
+          font-size: 0.55rem;
           font-weight: bold;
-          min-width: 14px;
-          height: 14px;
+          min-width: 13px;
+          height: 13px;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 2px;
+          padding: 1px;
+          z-index: 2;
         }
 
         .closed-icon-wrapper {
@@ -2454,8 +2614,8 @@ export default function Home() {
         }
         
         .closed-icon-wrapper svg {
-          width: 13px;
-          height: 13px;
+          width: 11px;
+          height: 11px;
         }
         
         .closed-icon-wrapper-more {
