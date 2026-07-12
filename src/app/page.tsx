@@ -1530,7 +1530,6 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
-                    </div>
                   ))}
 
                   <div style={{ marginTop: '0.8rem', display: 'flex', justifyContent: 'center' }}>
