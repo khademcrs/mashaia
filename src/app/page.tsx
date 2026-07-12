@@ -1669,9 +1669,10 @@ export default function Home() {
         /* Header */
         .app-header {
           position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
+          top: 15px;
+          left: 15px;
+          right: 15px;
+          border-radius: 20px;
           z-index: 1000;
           background: linear-gradient(135deg, #b60000 0%, #ff0000 100%);
           box-shadow: 0 4px 15px rgba(0,0,0,0.5);
@@ -2147,6 +2148,10 @@ export default function Home() {
         
         @media (max-width: 500px) {
           .app-header {
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            border-radius: 15px;
             padding: 0.8rem 1rem;
           }
           .header-top {
