@@ -832,16 +832,16 @@ export default function Home() {
                       return (
                         <div key={i} style={{ border: '1px solid rgba(255, 255, 255, 0.2)', padding: '1rem', borderRadius: '12px', background: 'rgba(255, 255, 255, 0.03)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap', flex: 1 }}>
-                              <div className="badge-icon-wrapper">
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', flex: 1 }}>
+                              <div className="badge-icon-wrapper" style={{ transform: 'scale(0.8)', transformOrigin: 'right center' }}>
                                 {getServiceIcon(name)}
                               </div>
-                              <span style={{ fontWeight: 'bold', color: 'white' }}>{name}</span>
+                              <span style={{ fontWeight: 'bold', color: 'white', fontSize: '0.85rem' }}>{name}</span>
                               {moukebServices.length > 0 && (
-                                <div style={{ display: 'flex', gap: '0.3rem', marginRight: '0.5rem', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', gap: '0.2rem', marginRight: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
                                   {moukebServices.map((srv: string, j: number) => (
-                                    <div key={j} title={srv} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--accent-color)', fontSize: '0.85rem', background: 'rgba(255, 0, 0, 0.05)', padding: '0.2rem 0.6rem', borderRadius: '15px', border: '1px solid rgba(255, 0, 0, 0.2)' }}>
-                                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '16px', height: '16px' }}>
+                                    <div key={j} title={srv} style={{ display: 'flex', alignItems: 'center', gap: '0.2rem', color: 'var(--accent-color)', fontSize: '0.7rem', background: 'rgba(255, 0, 0, 0.05)', padding: '0.15rem 0.4rem', borderRadius: '10px', border: '1px solid rgba(255, 0, 0, 0.2)' }}>
+                                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '12px', height: '12px' }}>
                                         {getServiceIcon(srv)}
                                       </div>
                                       <span>{srv}</span>
@@ -850,14 +850,12 @@ export default function Home() {
                                 </div>
                               )}
                             </div>
-                            <div style={{ display: 'flex', gap: '0.8rem' }}>
-                              <button className="edit-btn" onClick={(e) => { e.stopPropagation(); openEditModal(col, i); }} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.2rem', fontSize: '0.85rem' }}>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-                                تعديل
+                            <div style={{ display: 'flex', gap: '0.6rem', marginRight: '0.5rem' }}>
+                              <button className="edit-btn" onClick={(e) => { e.stopPropagation(); openEditModal(col, i); }} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.3rem' }} title="تعديل">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                               </button>
-                              <button className="delete-btn" onClick={(e) => { e.stopPropagation(); handleDeleteMoukebFromColumn(col, i); }} style={{ background: 'transparent', border: 'none', color: '#ff4d4f', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.2rem', fontSize: '0.85rem' }}>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-                                حذف
+                              <button className="delete-btn" onClick={(e) => { e.stopPropagation(); handleDeleteMoukebFromColumn(col, i); }} style={{ background: 'transparent', border: 'none', color: '#ff4d4f', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.3rem' }} title="حذف">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                               </button>
                             </div>
                           </div>
