@@ -17,7 +17,7 @@ export default function Home() {
     if (name.includes("مياه")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="5" r="2" /><path d="M9 7v6" /><path d="M7 7h4" /><path d="M9 13v6" /><path d="M7 19h4" /><circle cx="15" cy="5" r="2" /><path d="M15 7l-2 6h4z" /><path d="M15 13v6" /><path d="M13 19h4" /></svg>;
     if (name.includes("مبيت")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 4v16" /><path d="M2 8h18a2 2 0 0 1 2 2v10" /><path d="M2 17h20" /><path d="M6 8v9" /></svg>;
     if (name.includes("ضيافة")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>;
-    if (name.includes("غسيل")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="12" cy="13" r="5"></circle><path d="M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 0 0-5"></path></svg>;
+    if (name.includes("غسيل") || name.includes("غسل")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="12" cy="13" r="5"></circle><path d="M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 0 0-5"></path></svg>;
     if (name.includes("طبية") || name.includes("علاج")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"></path><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>;
     if (name.includes("مفقودين")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>;
     if (name.includes("اتصالات")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>;
@@ -88,10 +88,10 @@ export default function Home() {
   const [knownServices, setKnownServices] = useState<Record<string, string[]>>({
     "خدمات أساسية": ["مبيت", "ضيافة وطعام", "دورات مياه"],
     "دعم وطوارئ": ["مفرزة طبية", "علاج طبيعي", "مركز المفقودين", "استفتاءات شرعية"],
-    "خدمات تقنية وغيرها": ["شحن هواتف", "إنترنت مجاني", "مركز اتصالات", "صيانة وتصليح", "مفرزة خياطة"]
+    "خدمات تقنية وغيرها": ["شحن هواتف", "إنترنت مجاني", "مركز اتصالات", "صيانة وتصليح", "مفرزة خياطة", "غسل ملابس"]
   });
   const allKnownServices = Object.values(knownServices).flat();
-  const PREDEFINED_SERVICES = ['مبيت', 'ضيافة وطعام', 'دورات مياه', 'مفرزة طبية', 'علاج طبيعي', 'مركز المفقودين', 'استفتاءات شرعية', 'شحن هواتف', 'إنترنت مجاني', 'مركز اتصالات', 'صيانة وتصليح', 'مفرزة خياطة'];
+  const PREDEFINED_SERVICES = ['مبيت', 'ضيافة وطعام', 'دورات مياه', 'مفرزة طبية', 'علاج طبيعي', 'مركز المفقودين', 'استفتاءات شرعية', 'شحن هواتف', 'إنترنت مجاني', 'مركز اتصالات', 'صيانة وتصليح', 'مفرزة خياطة', 'غسل ملابس'];
 
 
 
@@ -1352,6 +1352,37 @@ export default function Home() {
                     </div>
                   ))}
 
+                  <div style={{ marginTop: '0.8rem', display: 'flex', justifyContent: 'center' }}>
+                    <button 
+                      type="button"
+                      onClick={() => {
+                        const newService = prompt("أدخل اسم الخدمة الجديدة:");
+                        if (newService && newService.trim() !== "") {
+                           const srvName = newService.trim();
+                           setKnownServices(prev => {
+                             const newState = { ...prev };
+                             if (!newState["خدمات مضافة"]) newState["خدمات مضافة"] = [];
+                             if (!newState["خدمات مضافة"].includes(srvName)) {
+                               newState["خدمات مضافة"].push(srvName);
+                             }
+                             return newState;
+                           });
+                           if (!editingMoukeb.services.includes(srvName)) {
+                             setEditingMoukeb({ ...editingMoukeb, services: [...editingMoukeb.services, srvName] });
+                           }
+                        }
+                      }}
+                      style={{
+                        padding: '0.4rem 1rem', borderRadius: '20px', border: '1px dashed var(--accent-color)',
+                        background: 'transparent',
+                        color: 'var(--accent-color)',
+                        cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem'
+                      }}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      إضافة خدمة أخرى
+                    </button>
+                  </div>
                 </div>
                 
                 <div className="form-actions" style={{ display: "flex", flexDirection: "row", gap: "0.8rem", marginTop: "1rem" }}>
@@ -1499,8 +1530,40 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
+                    </div>
                   ))}
 
+                  <div style={{ marginTop: '0.8rem', display: 'flex', justifyContent: 'center' }}>
+                    <button 
+                      type="button"
+                      onClick={() => {
+                        const newService = prompt("أدخل اسم الخدمة الجديدة:");
+                        if (newService && newService.trim() !== "") {
+                           const srvName = newService.trim();
+                           setKnownServices(prev => {
+                             const newState = { ...prev };
+                             if (!newState["خدمات مضافة"]) newState["خدمات مضافة"] = [];
+                             if (!newState["خدمات مضافة"].includes(srvName)) {
+                               newState["خدمات مضافة"].push(srvName);
+                             }
+                             return newState;
+                           });
+                           if (!formMoukebServices.includes(srvName)) {
+                             setFormMoukebServices(prev => [...prev, srvName]);
+                           }
+                        }
+                      }}
+                      style={{
+                        padding: '0.4rem 1rem', borderRadius: '20px', border: '1px dashed var(--accent-color)',
+                        background: 'transparent',
+                        color: 'var(--accent-color)',
+                        cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem'
+                      }}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      إضافة خدمة أخرى
+                    </button>
+                  </div>
                 </div>
                   
                   <div className="form-actions" style={{ display: "flex", flexDirection: "row", gap: "0.8rem", marginTop: "1rem" }}>
