@@ -1,15 +1,22 @@
 import type { Metadata } from 'next'
 import './globals.css'
 
+import type { Viewport } from 'next'
 
-export const viewport = {
+export const viewport: Viewport = {
   themeColor: '#ff0000',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export const metadata: Metadata = {
   title: 'مشاية',
   description: 'منصة تفاعلية لمواكب الأربعين',
+  manifest: '/manifest.json',
   appleWebApp: {
+    capable: true,
     title: 'مشاية',
     statusBarStyle: 'black-translucent',
   },

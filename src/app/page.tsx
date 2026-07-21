@@ -4,7 +4,11 @@ import { useEffect, useState, FormEvent } from "react";
 import MashayaLogo from "@/components/MashayaLogo";
 import SecondaryLogo from "@/components/SecondaryLogo";
 
+
+
 export default function Home() {
+
+
   const [moukebs, setMoukebs] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -14,10 +18,10 @@ export default function Home() {
   // dynamic services moved to state
 
   const getServiceIcon = (name: string) => {
-    if (name.includes("مياه")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="5" r="2" /><path d="M9 7v6" /><path d="M7 7h4" /><path d="M9 13v6" /><path d="M7 19h4" /><circle cx="15" cy="5" r="2" /><path d="M15 7l-2 6h4z" /><path d="M15 13v6" /><path d="M13 19h4" /></svg>;
+    if (name.includes("مياه")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"></rect><text x="12" y="16" fontSize="11" fontFamily="system-ui, sans-serif" fontWeight="bold" textAnchor="middle" fill="currentColor" stroke="none">WC</text></svg>;
     if (name.includes("مبيت")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 4v16" /><path d="M2 8h18a2 2 0 0 1 2 2v10" /><path d="M2 17h20" /><path d="M6 8v9" /></svg>;
     if (name.includes("ضيافة")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>;
-    if (name.includes("غسيل") || name.includes("غسل")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="12" cy="13" r="5"></circle><path d="M12 18a2.5 2.5 0 0 0 0-5 2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 0 0-5"></path></svg>;
+    if (name.includes("غسيل") || name.includes("غسل")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" /></svg>;
     if (name.includes("طبية") || name.includes("علاج")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"></path><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>;
     if (name.includes("مفقودين")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>;
     if (name.includes("اتصالات")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>;
@@ -26,17 +30,23 @@ export default function Home() {
     if (name.includes("خياطة")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>;
     if (name.includes("شحن") || name.includes("هواتف")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.19M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19"></path><line x1="23" y1="13" x2="23" y2="11"></line><polyline points="11 6 7 12 13 12 9 18"></polyline></svg>;
     if (name.includes("إنترنت") || name.includes("انترنت")) return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>;
-    
-    return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>;
+
+    if (name.includes("موكب") || name.includes("حسينية") || name.includes("نقطة") || name.includes("مضيف") || name.includes("مخيم") || name.includes("مسجد") || name.includes("جامع")) {
+      return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>;
+    }
+
+    return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>;
   };
 
   const [pendingMoukebs, setPendingMoukebs] = useState<any[]>([]);
   const [archivedPending, setArchivedPending] = useState<any[]>([]);
   const [pendingTab, setPendingTab] = useState<"new" | "archived">("new");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  
+
   // Reports State
   const [reports, setReports] = useState<any[]>([]);
+  const [archivedReports, setArchivedReports] = useState<any[]>([]);
+  const [reportsTab, setReportsTab] = useState<"new" | "archived">("new");
   const [reportModalOpen, setReportModalOpen] = useState(false);
   const [reportColumn, setReportColumn] = useState<number | null>(null);
   const [reportType, setReportType] = useState("اسم الموكب");
@@ -44,16 +54,16 @@ export default function Home() {
   const [isSubmittingReport, setIsSubmittingReport] = useState(false);
   const [showReportToast, setShowReportToast] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
-  
+
   // Modals State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [addStep, setAddStep] = useState(1);
   const [selectedService, setSelectedService] = useState("");
-  const [availableServices, setAvailableServices] = useState(["دورات مياه", "مبيت", "ضيافة", "غسيل ملابس"]);
+  const [availableServices, setAvailableServices] = useState(["دورات مياه", "مبيت", "ضيافة وطعام", "غسيل ملابس"]);
   const [newServiceInput, setNewServiceInput] = useState("");
   const [formMoukebServices, setFormMoukebServices] = useState<string[]>([]);
   const [formOtherServices, setFormOtherServices] = useState("");
-  
+
   const handleToggleService = (srv: string) => {
     if (formMoukebServices.includes(srv)) {
       setFormMoukebServices(formMoukebServices.filter(s => s !== srv));
@@ -83,15 +93,16 @@ export default function Home() {
   const [lastClickTime, setLastClickTime] = useState(0);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
   const [adminPassword, setAdminPassword] = useState("");
-  const [adminView, setAdminView] = useState<'main'|'columns'|'pending'|'services'|'reports'>('main');
+  const [adminView, setAdminView] = useState<'main' | 'columns' | 'pending' | 'services' | 'reports'>('main');
   const [knownServices, setKnownServices] = useState<Record<string, string[]>>({
     "خدمات أساسية": ["مبيت", "ضيافة وطعام", "دورات مياه"],
     "دعم وطوارئ": ["مفرزة طبية", "علاج طبيعي", "مركز المفقودين", "استفتاءات شرعية"],
-    "خدمات تقنية وغيرها": ["شحن هواتف", "إنترنت مجاني", "مركز اتصالات", "صيانة وتصليح", "مفرزة خياطة", "غسل ملابس"]
+    "خدمات تقنية وغيرها": ["شحن هواتف", "إنترنت مجاني", "مركز اتصالات", "صيانة وتصليح", "مفرزة خياطة", "غسيل ملابس"]
   });
-  const allKnownServices = Object.values(knownServices).flat();
-  const PREDEFINED_SERVICES = ['مبيت', 'ضيافة وطعام', 'دورات مياه', 'مفرزة طبية', 'علاج طبيعي', 'مركز المفقودين', 'استفتاءات شرعية', 'شحن هواتف', 'إنترنت مجاني', 'مركز اتصالات', 'صيانة وتصليح', 'مفرزة خياطة', 'غسل ملابس'];
+  const allKnownServices = Array.from(new Set(Object.values(knownServices).flat()));
+  const PREDEFINED_SERVICES = ['مبيت', 'ضيافة وطعام', 'دورات مياه', 'مفرزة طبية', 'علاج طبيعي', 'مركز المفقودين', 'استفتاءات شرعية', 'شحن هواتف', 'إنترنت مجاني', 'مركز اتصالات', 'صيانة وتصليح', 'مفرزة خياطة', 'غسيل ملابس'];
 
 
 
@@ -109,6 +120,8 @@ export default function Home() {
 
   // Expanded Column
   const [expandedCol, setExpandedCol] = useState<number | null>(null);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
 
 
   const fetchServices = async () => {
@@ -126,7 +139,16 @@ export default function Home() {
     fetchMoukebs();
     fetchServices();
 
-    
+    const savedSession = localStorage.getItem("adminSession");
+    if (savedSession) {
+      try {
+        const parsed = JSON.parse(savedSession);
+        setIsAdmin(true);
+        setAdminPassword(parsed.password);
+      } catch(e) {}
+    }
+
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -134,16 +156,17 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  
-  
+
+
   const fetchReports = async () => {
     try {
-      const res = await fetch(`/api/reports?adminPassword=${adminPassword}`, {
+      const res = await fetch(`/api/reports?includeArchived=true&adminPassword=${adminPassword}`, {
         headers: { "X-Admin-Password": adminPassword }, cache: "no-store"
       });
       if (res.ok) {
         const data = await res.json();
-        setReports(data);
+        setReports(data.active || data);
+        setArchivedReports(data.archived || []);
       }
     } catch (err) {
       console.error(err);
@@ -164,12 +187,13 @@ export default function Home() {
       if (res.ok) {
         setPendingMoukebs(await res.json());
       }
-      
-      const resArchived = await fetch(`/api/moukebs/pending?archived=true&adminPassword=${adminPassword}`, {
+
+      const resArchived = await fetch(`/api/moukebs/pending?includeArchived=true&adminPassword=${adminPassword}`, {
         headers: { "X-Admin-Password": adminPassword }, cache: "no-store"
       });
       if (resArchived.ok) {
-        setArchivedPending(await resArchived.json());
+        const data = await resArchived.json();
+        setArchivedPending(data.archived || []);
       }
     } catch (err) {
       console.error(err);
@@ -207,22 +231,35 @@ export default function Home() {
     }
   };
 
+    const handleLogout = () => {
+    setIsAdmin(false);
+    setAdminPassword("");
+    setAdminView('main');
+    setIsPreviewMode(false);
+    localStorage.removeItem("adminSession");
+  };
+
   const handleAdminLogin = (e: FormEvent) => {
     e.preventDefault();
     if (adminPassword === "kmnt" || adminPassword === "kadm313") {
       setIsAdmin(true);
       setShowLoginModal(false);
+      localStorage.setItem("adminSession", JSON.stringify({ password: adminPassword }));
       alert("تم تسجيل الدخول بنجاح.");
     } else {
       alert("كلمة المرور غير صحيحة.");
     }
   };
 
-  
+
   const handleReportSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!isOnline) {
+      alert("عذراً، يجب توفر اتصال بالإنترنت لإرسال ملاحظات، يرجى المحاولة لاحقاً");
+      return;
+    }
     if (!reportColumn || !reportText) return;
-    
+
     setIsSubmittingReport(true);
     try {
       const res = await fetch(`/api/reports?adminPassword=${adminPassword}`, {
@@ -267,24 +304,31 @@ export default function Home() {
     }
   };
 
-  const handleApproveReport = (columnId: number, reportId: string) => {
-    const moukebToEdit = moukebs.find(m => m.column === columnId);
-    if (moukebToEdit) {
-      openEditModal(moukebToEdit, 0);
-    } else {
-      alert("تعذر العثور على الموكب للتعديل.");
+  const handleApproveReport = async (reportId: string) => {
+    try {
+      const res = await fetch(`/api/reports?adminPassword=${adminPassword}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json", "X-Admin-Password": adminPassword },
+        body: JSON.stringify({ id: reportId, action: 'approve' }),
+        cache: "no-store"
+      });
+      if (res.ok) {
+        fetchReports();
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
   const handleAddMoukeb = async (e: FormEvent) => {
     e.preventDefault();
     if (!formColumn) return;
-    
+
     let allServices = [...formMoukebServices];
     if (formOtherServices.trim()) {
       allServices.push(formOtherServices.trim());
     }
-    
+
     let finalName = formNames.trim();
     if (!finalName) {
       if (allServices.length > 0) {
@@ -294,7 +338,7 @@ export default function Home() {
         return;
       }
     }
-    
+
     const finalNote = allServices.length > 0 ? "الخدمات: " + allServices.join("، ") : "";
 
     setIsSubmitting(true);
@@ -306,11 +350,12 @@ export default function Home() {
         note: finalNote
       };
 
-      const res = await fetch(`/api/moukebs?adminPassword=${adminPassword}`, {
+      const endpoint = "/api/moukebs/pending";
+      const res = await fetch(endpoint, {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
-          ...(isAdmin ? {"X-Admin-Password": adminPassword} : {})
+          ...(isAdmin ? { "X-Admin-Password": adminPassword } : {})
         },
         body: JSON.stringify(payload)
       });
@@ -323,7 +368,7 @@ export default function Home() {
         setFormOtherServices("");
         setFormMoukebServices([]);
         setAddStep(3); // Go to success screen
-        
+
         if (isAdmin) {
           fetchPendingMoukebs();
           fetchMoukebs();
@@ -339,13 +384,30 @@ export default function Home() {
 
 
 
-  
+
   const handleApprovePending = async (id: string) => {
     try {
-      const res = await fetch(`/api/moukebs/pending?adminPassword=${adminPassword}`, {
+      const pendingMoukeb = pendingMoukebs.find(m => m.id === id);
+      if (!pendingMoukeb) return;
+
+      const addRes = await fetch(`/api/moukebs?adminPassword=${adminPassword}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "X-Admin-Password": adminPassword },
-        body: JSON.stringify({ id })
+        body: JSON.stringify({
+          column: pendingMoukeb.column,
+          names: pendingMoukeb.names,
+          country: pendingMoukeb.country,
+          note: pendingMoukeb.note
+        })
+      });
+
+      if (!addRes.ok) throw new Error("Failed to add to moukebs");
+
+      const res = await fetch(`/api/moukebs/pending?adminPassword=${adminPassword}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json", "X-Admin-Password": adminPassword },
+        body: JSON.stringify({ id, action: 'approve' }),
+        cache: "no-store"
       });
       if (res.ok) {
         alert("تم اعتماد الموكب وإضافته للموقع بنجاح!");
@@ -401,11 +463,11 @@ export default function Home() {
   const handleEditSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!editingMoukeb) return;
-    
+
     setIsSubmitting(true);
-    
+
     const { originalData, index, name, services } = editingMoukeb;
-    
+
     let finalName = name;
     if (!finalName && services.length === 1 && allKnownServices.includes(services[0])) {
       finalName = services[0];
@@ -420,12 +482,12 @@ export default function Home() {
     while (newNotes.length < originalData.names.length) {
       newNotes.push('');
     }
-    
+
     const serviceString = services.filter(s => s !== finalName).join('،');
     newNotes[index] = serviceString ? `الخدمات: ${serviceString}` : '';
-    
+
     const updatedNote = newNotes.join(' - ').replace(/ - $/, '');
-    
+
     try {
       const res = await fetch(`/api/moukebs?adminPassword=${adminPassword}`, {
         method: "PUT",
@@ -500,14 +562,14 @@ export default function Home() {
   const openEditModal = (col: any, index: number) => {
     let name = col.names[index] || "";
     let services: string[] = [];
-    
+
     if (col.note) {
       const parts = col.note.split(' - ');
       if (parts[index]) {
         services = parts[index].replace('الخدمات:', '').trim().split('،').map((s: string) => s.trim()).filter((s: string) => s);
       }
     }
-    
+
     if (allKnownServices.includes(name)) {
       if (!services.includes(name)) {
         services.push(name);
@@ -534,7 +596,7 @@ export default function Home() {
       const q = search.toLowerCase();
       matchesSearch = col.column.toString().includes(q) || col.names.some((n: string) => n.toLowerCase().includes(q));
     }
-    
+
     // category filter
     let matchesFilter = true;
     if (selectedFilters.length > 0) {
@@ -546,9 +608,11 @@ export default function Home() {
         }
       });
     }
-    
+
     return matchesSearch && matchesFilter;
   }).sort((a, b) => a.column - b.column);
+
+  const effectiveIsAdmin = isAdmin && !isPreviewMode;
 
   return (
     <div>
@@ -561,41 +625,121 @@ export default function Home() {
               <SecondaryLogo className="secondary-logo" />
             </div>
           </div>
-          <div id="language-switcher">
-            {isAdmin && (
-              <span style={{ color: 'white', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', border: '1px solid white', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>
-                <svg width="22" height="22" viewBox="0 0 86.1 68.1" fill="white">
-                  <path d="M75.2,12.8l-16.3,15.4c-.6.6-.9,1.3-.9,2.1l-.2,13.5h5.2c0,0,.2-12.5.2-12.5l6.7-6.3-3.8,26h-11.3l-.2-20c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9l.2,24.3c0,.5.4.9.9.9h22.2c.5,0,.9-.4.9-.9v-3.4c0-.5-.4-.9-.9-.9h-1.4l5.5-37.5c.1-.8-.9-1.3-1.5-.8Z"/>
-                  <path d="M38.8,30.4c-3.6,0-6.5,2.9-6.5,6.5v.3c0,.5.4.9.9.9h3.4c.5,0,.9-.4.9-.9v-.3c0-.7.6-1.3,1.3-1.3h2.1v15.5c0,0-3.4,0-3.4,0v-6.4c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9v10.7c0,.5.4.9.9.9h12.1c.5,0,.9-.4.9-.9v-24.1c-.1-.5-.5-.9-1-.9h-6.3Z"/>
-                  <path d="M15.9,51.1h-1.8c-.5,0-.9.4-.9.9v3.4c0,.5.4.9.9.9h14.6c.5,0,.9-.4.9-.9v-24.9c0-.9-.4-1.7-1-2.3L11.4,13c-.6-.5-1.6,0-1.5.8l6,37.3ZM24.4,31.4v19.7h-3.3l-4.2-26.3,7.5,6.6Z"/>
-                  <path d="M56.9,23.3h0c1.7,0,3-1.4,3-3.1h0s0,0,0,0c0-1.7-1.4-3-3.1-3h0c-1.7,0-3,1.4-3,3.1h0s0,0,0,0c0,1.7,1.4,3,3.1,3h0Z"/>
-                </svg>
-                صفحة خادم
-              </span>
-            )}
+          <div id="language-switcher" style={{ display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
 
-            <button className="primary-btn-outline" onClick={() => { setAddStep(1); setIsModalOpen(true); }}>+ أضف خدمة</button>
+            {isAdmin && !isPreviewMode ? (
+              <>
+                <button
+                  className="primary-btn-outline"
+                  onClick={handleLogout}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0', borderRadius: '50%',
+                    width: '40px', height: '40px', minWidth: '40px', transition: 'all 0.3s ease', overflow: 'hidden', color: 'white', border: '1px solid white'
+                  }}
+                  title="تسجيل الخروج"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                </button>
+                <button
+                  className="primary-btn-outline"
+                  onClick={() => setIsPreviewMode(true)}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0', borderRadius: '50%',
+                    width: '40px', height: '40px', minWidth: '40px', transition: 'all 0.3s ease', overflow: 'hidden', color: 'white', border: '1px solid white'
+                  }}
+                  title="معاينة وضع الزائر"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+                <span
+                  style={{
+                    color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0', borderRadius: '50%',
+                    width: '40px', height: '40px', minWidth: '40px', transition: 'all 0.3s ease', overflow: 'hidden', border: '1px solid white'
+                  }}
+                  title="لوحة التحكم"
+                >
+                  <svg width="20" height="20" viewBox="0 0 86.1 68.1" fill="white">
+                    <path d="M75.2,12.8l-16.3,15.4c-.6.6-.9,1.3-.9,2.1l-.2,13.5h5.2c0,0,.2-12.5.2-12.5l6.7-6.3-3.8,26h-11.3l-.2-20c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9l.2,24.3c0,.5.4.9.9.9h22.2c.5,0,.9-.4.9-.9v-3.4c0-.5-.4-.9-.9-.9h-1.4l5.5-37.5c.1-.8-.9-1.3-1.5-.8Z" />
+                    <path d="M38.8,30.4c-3.6,0-6.5,2.9-6.5,6.5v.3c0,.5.4.9.9.9h3.4c.5,0,.9-.4.9-.9v-.3c0-.7.6-1.3,1.3-1.3h2.1v15.5c0,0-3.4,0-3.4,0v-6.4c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9v10.7c0,.5.4.9.9.9h12.1c.5,0,.9-.4.9-.9v-24.1c-.1-.5-.5-.9-1-.9h-6.3Z" />
+                    <path d="M15.9,51.1h-1.8c-.5,0-.9.4-.9.9v3.4c0,.5.4.9.9.9h14.6c.5,0,.9-.4.9-.9v-24.9c0-.9-.4-1.7-1-2.3L11.4,13c-.6-.5-1.6,0-1.5.8l6,37.3ZM24.4,31.4v19.7h-3.3l-4.2-26.3,7.5,6.6Z" />
+                    <path d="M56.9,23.3h0c1.7,0,3-1.4,3-3.1h0s0,0,0,0c0-1.7-1.4-3-3.1-3h0c-1.7,0-3,1.4-3,3.1h0s0,0,0,0c0,1.7,1.4,3,3.1,3h0Z" />
+                  </svg>
+                </span>
+                <button
+                  className="primary-btn-outline"
+                  onClick={() => { setAddStep(1); setIsModalOpen(true); }}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0', borderRadius: '50%',
+                    width: '40px', height: '40px', minWidth: '40px', transition: 'all 0.3s ease', overflow: 'hidden', color: 'white', border: '1px solid white'
+                  }}
+                  title="أضف خدمة"
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14" /></svg>
+                </button>
+              </>
+            ) : (
+              <>
+                {isAdmin && isPreviewMode && (
+                  <button
+                    className="primary-btn-outline"
+                    onClick={() => setIsPreviewMode(false)}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0', borderRadius: '50%',
+                      width: '40px', height: '40px', minWidth: '40px', transition: 'all 0.3s ease', overflow: 'hidden', color: 'white', border: '1px solid white'
+                    }}
+                    title="الرجوع للوحة التحكم"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                  </button>
+                )}
+                <button
+                  className="primary-btn-outline"
+                  onClick={() => { setAddStep(1); setIsModalOpen(true); }}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    gap: isScrolled ? '0' : '0.4rem',
+                    padding: isScrolled ? '0' : '0.4rem 0.8rem',
+                    borderRadius: isScrolled ? '50%' : '10px',
+                    width: isScrolled ? '40px' : 'auto',
+                    height: isScrolled ? '40px' : 'auto',
+                    minWidth: isScrolled ? '40px' : 'auto',
+                    transition: 'all 0.3s ease', overflow: 'hidden', whiteSpace: 'nowrap'
+                  }}
+                  title="أضف خدمة"
+                >
+                  {isScrolled ? (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14M5 12h14" /></svg>
+                  ) : (
+                    <span>+ أضف خدمة</span>
+                  )}
+                </button>
+              </>
+            )}
           </div>
         </div>
       </header>
 
       <main className="main-content">
+        {!isOnline && (
+          <div style={{ background: '#ff4444', color: 'white', textAlign: 'center', padding: '0.6rem', fontSize: '0.9rem', fontWeight: 'bold', zIndex: 100, position: 'relative' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ verticalAlign: 'middle', marginLeft: '0.5rem' }}><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.58 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+            أنت تتصفح الموقع حالياً بدون إنترنت (وضع الأوفلاين)
+          </div>
+        )}
         {/* Hero Section */}
-        <section className="hero-section" style={{ display: (!isAdmin || adminView === 'main') ? 'flex' : 'none' }}>
-          {isAdmin ? (
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
-                <div style={{ width: '100px', height: '100px' }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86.1 68.1" style={{ width: "100%", height: "100%" }} fill="#ff0000">
-                    <path d="M75.2,12.8l-16.3,15.4c-.6.6-.9,1.3-.9,2.1l-.2,13.5h5.2c0,0,.2-12.5.2-12.5l6.7-6.3-3.8,26h-11.3l-.2-20c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9l.2,24.3c0,.5.4.9.9.9h22.2c.5,0,.9-.4.9-.9v-3.4c0-.5-.4-.9-.9-.9h-1.4l5.5-37.5c.1-.8-.9-1.3-1.5-.8Z"/>
-                    <path d="M38.8,30.4c-3.6,0-6.5,2.9-6.5,6.5v.3c0,.5.4.9.9.9h3.4c.5,0,.9-.4.9-.9v-.3c0-.7.6-1.3,1.3-1.3h2.1v15.5c0,0-3.4,0-3.4,0v-6.4c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9v10.7c0,.5.4.9.9.9h12.1c.5,0,.9-.4.9-.9v-24.1c-.1-.5-.5-.9-1-.9h-6.3Z"/>
-                    <path d="M15.9,51.1h-1.8c-.5,0-.9.4-.9.9v3.4c0,.5.4.9.9.9h14.6c.5,0,.9-.4.9-.9v-24.9c0-.9-.4-1.7-1-2.3L11.4,13c-.6-.5-1.6,0-1.5.8l6,37.3ZM24.4,31.4v19.7h-3.3l-4.2-26.3,7.5,6.6Z"/>
-                    <path d="M56.9,23.3h0c1.7,0,3-1.4,3-3.1h0s0,0,0,0c0-1.7-1.4-3-3.1-3h0c-1.7,0-3,1.4-3,3.1h0s0,0,0,0c0,1.7,1.4,3,3.1,3h0Z"/>
-                  </svg>
-                </div>
+        <section className="hero-section" style={{ display: (!effectiveIsAdmin || adminView === 'main') ? 'flex' : 'none' }}>
+          {effectiveIsAdmin ? (
+            <div className="admin-hero-container">
+              <div className="admin-hero-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86.1 68.1" style={{ width: "100%", height: "100%" }} fill="#ff0000">
+                  <path d="M75.2,12.8l-16.3,15.4c-.6.6-.9,1.3-.9,2.1l-.2,13.5h5.2c0,0,.2-12.5.2-12.5l6.7-6.3-3.8,26h-11.3l-.2-20c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9l.2,24.3c0,.5.4.9.9.9h22.2c.5,0,.9-.4.9-.9v-3.4c0-.5-.4-.9-.9-.9h-1.4l5.5-37.5c.1-.8-.9-1.3-1.5-.8Z" />
+                  <path d="M38.8,30.4c-3.6,0-6.5,2.9-6.5,6.5v.3c0,.5.4.9.9.9h3.4c.5,0,.9-.4.9-.9v-.3c0-.7.6-1.3,1.3-1.3h2.1v15.5c0,0-3.4,0-3.4,0v-6.4c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9v10.7c0,.5.4.9.9.9h12.1c.5,0,.9-.4.9-.9v-24.1c-.1-.5-.5-.9-1-.9h-6.3Z" />
+                  <path d="M15.9,51.1h-1.8c-.5,0-.9.4-.9.9v3.4c0,.5.4.9.9.9h14.6c.5,0,.9-.4.9-.9v-24.9c0-.9-.4-1.7-1-2.3L11.4,13c-.6-.5-1.6,0-1.5.8l6,37.3ZM24.4,31.4v19.7h-3.3l-4.2-26.3,7.5,6.6Z" />
+                  <path d="M56.9,23.3h0c1.7,0,3-1.4,3-3.1h0s0,0,0,0c0-1.7-1.4-3-3.1-3h0c-1.7,0-3,1.4-3,3.1h0s0,0,0,0c0,1.7,1.4,3,3.1,3h0Z" />
+                </svg>
               </div>
-              <h2 style={{ color: '#ff0000', fontSize: '2.5rem', marginBottom: '1rem', fontWeight: 'bold' }}>شرفُ الخادم.. نسبُه إلى مولاه</h2>
-              <div style={{ color: '#ff0000', fontSize: '1.25rem', lineHeight: '1.8', maxWidth: '850px', margin: '0 auto', fontWeight: 'bold' }}>
+              <h2 className="admin-hero-title">شرفُ الخادم.. نسبُه إلى مولاه</h2>
+              <div className="admin-hero-text">
                 يا خادم الحسين.. دقةُ المراجعةِ جزءٌ من شرفِ الخدمة. دَقِّقْ في مساهماتِ الخدام، واعتمدْ منها ما يُعينُ الزائرَ في مَسيرِه، لتكونَ خُطواتهم في ميزانِ حسناتِك
               </div>
             </div>
@@ -607,54 +751,137 @@ export default function Home() {
             </>
           )}
         </section>
-        
-        {isAdmin && adminView === 'main' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', padding: '0 1rem', maxWidth: '900px', margin: '0 auto 4rem auto' }}>
-            {adminPassword !== "kadm313" && (
-              <div className="glass" style={{ padding: '2rem', textAlign: 'center', borderRadius: '20px', cursor: 'pointer', transition: 'all 0.3s' }} onClick={() => setAdminView('columns')}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🏛️</div>
-                <h3 style={{ margin: 0, color: 'var(--text-color)' }}>إدارة الأعمدة</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.5rem' }}>التحكم الكامل بأعمدة طريق المشاية والمواكب الموجودة بها.</p>
+
+        {effectiveIsAdmin && adminView === 'main' && (
+          <div className="admin-cards-container">
+              <div className="glass admin-nav-card" onClick={() => setAdminView('columns')}>
+                <div className="admin-nav-icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="4" rx="1" /><rect x="4" y="18" width="16" height="4" rx="1" /><path d="M7 6v12" /><path d="M12 6v12" /><path d="M17 6v12" /></svg>
+                </div>
+                <h3>إدارة الأعمدة</h3>
+                <p>التحكم الكامل بأعمدة طريق المشاية والمواكب الموجودة بها.</p>
               </div>
-            )}
-            
-            <div className="glass" style={{ padding: '2rem', textAlign: 'center', borderRadius: '20px', cursor: 'pointer', transition: 'all 0.3s', position: 'relative' }} onClick={() => setAdminView('pending')}>
+
+            <div className="glass admin-nav-card" onClick={() => setAdminView('pending')}>
               {pendingMoukebs.length > 0 && (
-                <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#ff0000', color: 'white', borderRadius: '50%', width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+                <div className="admin-badge">
                   {pendingMoukebs.length}
                 </div>
               )}
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📨</div>
-              <h3 style={{ margin: 0, color: 'var(--text-color)' }}>إضافات الخدام</h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.5rem' }}>مراجعة وتدقيق الإضافات المقترحة من قبل الخدام.</p>
-            </div>
-            
-            <div className="glass" style={{ padding: '2rem', textAlign: 'center', borderRadius: '20px', cursor: 'pointer', transition: 'all 0.3s' }} onClick={() => setAdminView('services')}>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚙️</div>
-              <h3 style={{ margin: 0, color: 'var(--text-color)' }}>إعدادات الخدمات</h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.5rem' }}>إضافة وتعديل أنواع الخدمات المتاحة في النظام بالكامل.</p>
+              <div className="admin-nav-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /><path d="M12 7v5l3 3" /></svg>
+              </div>
+              <h3>إضافات الخدام</h3>
+              <p>مراجعة وتدقيق الإضافات المقترحة من قبل الخدام.</p>
             </div>
 
-            <div className="glass" style={{ padding: '2rem', textAlign: 'center', borderRadius: '20px', cursor: 'pointer', transition: 'all 0.3s', position: 'relative' }} onClick={() => setAdminView('reports')}>
+            <div className="glass admin-nav-card" onClick={() => setAdminView('services')}>
+              <div className="admin-nav-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>
+              </div>
+              <h3>إعدادات الخدمات</h3>
+              <p>إضافة وتعديل أنواع الخدمات المتاحة في النظام بالكامل.</p>
+            </div>
+
+            <div className="glass admin-nav-card" onClick={() => setAdminView('reports')}>
               {reports.length > 0 && (
-                <div style={{ position: 'absolute', top: '15px', right: '15px', background: '#ff0000', color: 'white', borderRadius: '50%', width: '30px', height: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+                <div className="admin-badge">
                   {reports.length}
                 </div>
               )}
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📝</div>
-              <h3 style={{ margin: 0, color: 'var(--text-color)' }}>تعديلات واقتراحات</h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.5rem' }}>مراجعة اقتراحات الخدام وتصحيح المعلومات الخاطئة.</p>
+              <div className="admin-nav-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+              </div>
+              <h3>تعديلات واقتراحات</h3>
+              <p>مراجعة اقتراحات الخدام وتصحيح المعلومات الخاطئة.</p>
             </div>
           </div>
         )}
+        {effectiveIsAdmin && adminView !== 'main' && (
+          <div className="admin-sticky-bar" style={isSearchExpanded ? { padding: '0.4rem' } : undefined}>
+            {isSearchExpanded && adminView === 'columns' ? (
+              <div className="search-container" style={{ width: '100%', margin: 0, position: 'relative' }}>
+                <input
+                  type="text"
+                  placeholder="ابحث برقم العمود أو اسم الموكب..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  style={{ paddingLeft: '3.5rem', paddingRight: '3rem' }}
+                  autoFocus
+                />
+                <div className="search-icon" style={{ right: '1rem', left: 'auto' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <button
+                  onClick={() => { setIsSearchExpanded(false); setSearch(''); }}
+                  style={{ position: 'absolute', left: '3rem', top: '50%', transform: 'translateY(-50%)', background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', display: 'flex', zIndex: 10 }}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+                <button
+                  className={`inline-filter-btn ${selectedFilters.length > 0 ? 'active' : ''}`}
+                  onClick={() => { setTempFilters([...selectedFilters]); setIsFilterModalOpen(true); }}
+                  title="تصفية النتائج"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                  {selectedFilters.length > 0 && <span className="inline-filter-badge">{selectedFilters.length}</span>}
+                </button>
+              </div>
+            ) : (
+              <>
+                <button className="admin-icon-btn" onClick={() => setAdminView('main')} title="رجوع">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                </button>
 
-        <div style={{ display: (!isAdmin || adminView === 'columns') ? 'block' : 'none' }}>
+                {adminView === 'pending' && (
+                  <>
+                    <div className="admin-glass-tabs">
+                      <button className={`glass-tab-btn ${pendingTab === 'new' ? 'active' : ''}`} onClick={() => setPendingTab('new')}>الطلبات ({pendingMoukebs.length})</button>
+                      {adminPassword === 'kmnt' && (
+                        <button className={`glass-tab-btn ${pendingTab === 'archived' ? 'active' : ''}`} onClick={() => setPendingTab('archived')}>الأرشيف ({archivedPending.length})</button>
+                      )}
+                    </div>
+                    <button className="admin-icon-btn refresh-btn" onClick={fetchPendingMoukebs} title="تحديث">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" /></svg>
+                    </button>
+                  </>
+                )}
 
-<div className="search-filter-wrapper" style={{ flexDirection: 'column', gap: '1rem', width: '100%', paddingTop: (!isAdmin || adminView === 'main') ? '0' : '100px', marginBottom: '3rem', marginTop: '1rem' }}>
+                {adminView === 'columns' && (
+                  <>
+                    <div style={{ flex: 1 }}></div>
+                    <button className="admin-icon-btn refresh-btn" onClick={() => setIsSearchExpanded(true)} title="بحث">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        )}
+
+        {effectiveIsAdmin && adminView === 'columns' && selectedFilters.length > 0 && (
+          <div className="active-filters-banner" style={{ margin: '0 auto 2rem auto', maxWidth: '900px' }}>
+            <span className="banner-text">تصفية حالية لـ:</span>
+            <div className="banner-tags">
+              {selectedFilters.map(f => (
+                <span key={f} className="banner-tag">{getServiceIcon(f)} {f}</span>
+              ))}
+            </div>
+            <button className="clear-filters-btn" onClick={() => setSelectedFilters([])}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              إلغاء الفلترة
+            </button>
+          </div>
+        )}
+
+        <div style={{ display: !effectiveIsAdmin ? 'block' : 'none' }}>
+
+          <div className="search-filter-wrapper" style={{ flexDirection: 'column', gap: '1rem', width: '100%', paddingTop: (!effectiveIsAdmin || adminView === 'main') ? '0' : '100px', marginBottom: '3rem', marginTop: '0' }}>
             <div className="search-container" style={{ width: '100%', maxWidth: '100%', position: 'relative' }}>
-              <input 
-                type="text" 
-                placeholder="ابحث برقم العمود أو اسم الموكب..." 
+              <input
+                type="text"
+                placeholder="ابحث برقم العمود أو اسم الموكب..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{ paddingLeft: '3.5rem' }}
@@ -662,7 +889,7 @@ export default function Home() {
               <div className="search-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
               </div>
-              <button 
+              <button
                 className={`inline-filter-btn ${selectedFilters.length > 0 ? 'active' : ''}`}
                 onClick={() => { setTempFilters([...selectedFilters]); setIsFilterModalOpen(true); }}
                 title="تصفية النتائج"
@@ -671,7 +898,7 @@ export default function Home() {
                 {selectedFilters.length > 0 && <span className="inline-filter-badge">{selectedFilters.length}</span>}
               </button>
             </div>
-            
+
             {selectedFilters.length > 0 && (
               <div className="active-filters-banner">
                 <span className="banner-text">تصفية حالية لـ:</span>
@@ -693,32 +920,16 @@ export default function Home() {
 
 
 
-        {isAdmin && adminView === 'pending' && (
-          <div className="admin-list-view" style={{ paddingTop: "100px" }}>
-            <div style={{ padding: '1rem', marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <button className="cancel-btn" onClick={() => setAdminView('main')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.1)', color: 'white' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                عودة
-              </button>
-              <button className="primary-btn" onClick={fetchPendingMoukebs} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                تحديث
-              </button>
-            </div>
-            
-            <div className="admin-tabs" style={{ marginBottom: '2rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <button className={`tab-btn ${pendingTab === 'new' ? 'active' : ''}`} onClick={() => setPendingTab('new')}>الطلبات الجديدة ({pendingMoukebs.length})</button>
-              {adminPassword !== "kadm313" && (
-                <button className={`tab-btn ${pendingTab === 'archived' ? 'active' : ''}`} onClick={() => setPendingTab('archived')}>الأرشيف ({archivedPending.length})</button>
-              )}
-            </div>
+        {effectiveIsAdmin && adminView === 'pending' && (
+          <div className="admin-list-view" style={{ paddingTop: "0" }}>
+
 
             {pendingTab === 'new' ? (
               pendingMoukebs.length > 0 ? (
                 <div className="pending-section" style={{ marginBottom: "3rem", padding: "2rem", background: "rgba(255, 0, 0, 0.1)", borderRadius: "16px", border: "1px solid var(--accent-color)" }}>
                   <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                     {pendingMoukebs.map(pending => (
-                      <div key={pending.id} className="admin-list-item" style={{ background: "rgba(0,0,0,0.4)" }}>
+                      <div key={pending.id} className="admin-list-item" style={{ background: "rgba(0,0,0,0.4)", padding: "1rem", borderRadius: "12px" }}>
                         <div className="admin-list-header">
                           <span className="admin-col-number">عمود {pending.column}</span>
                           <div className="admin-actions">
@@ -726,11 +937,27 @@ export default function Home() {
                             <button className="delete-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.9rem" }} onClick={() => handleRejectPending(pending.id)}>❌ رفض</button>
                           </div>
                         </div>
-                        <div className="admin-list-content">
-                          <div className="admin-detail-item"><strong>المواكب:</strong> {pending.names.join('، ')}</div>
-                          {pending.country && <div className="admin-detail-item"><strong>الدولة:</strong> {pending.country}</div>}
-                          {pending.note && <div className="admin-detail-item"><strong>ملاحظة:</strong> <span style={{color: "var(--accent-color)"}}>{pending.note}</span></div>}
-                          {pending.createdAt && <div className="admin-detail-item" style={{opacity: 0.5, fontSize: "0.8rem"}}>تاريخ: {new Date(pending.createdAt).toLocaleString('ar-SA')}</div>}
+                        <div className="admin-list-content" style={{ gap: '0.4rem' }}>
+                          <div className="admin-detail-item" style={{ fontSize: '0.9rem' }}><strong>الاسم:</strong> {pending.names.join('، ')}</div>
+                          {pending.country && <div className="admin-detail-item" style={{ fontSize: '0.85rem' }}><strong>الدولة:</strong> {pending.country}</div>}
+                          {(() => {
+                              const noteStr = pending.note || "";
+                              if (!noteStr) return null;
+                              if (noteStr.startsWith("الخدمات: ")) {
+                                const srvs = noteStr.replace("الخدمات: ", "").split("، ");
+                                return (
+                                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.3rem' }}>
+                                    {srvs.map(srv => (
+                                      <span key={srv} className="banner-tag" style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', background: 'rgba(255,255,255,0.1)' }}>
+                                        {getServiceIcon(srv)} {srv}
+                                      </span>
+                                    ))}
+                                  </div>
+                                );
+                              }
+                              return <div className="admin-detail-item" style={{ fontSize: '0.85rem' }}><strong>ملاحظة:</strong> <span style={{ color: "var(--accent-color)" }}>{pending.note}</span></div>;
+                            })()}
+                          {pending.createdAt && <div className="admin-detail-item" style={{ opacity: 0.5, fontSize: "0.75rem", marginTop: '0.3rem' }}>تاريخ: {new Date(pending.createdAt).toLocaleString('ar-SA')}</div>}
                         </div>
                       </div>
                     ))}
@@ -744,17 +971,33 @@ export default function Home() {
                 <div className="pending-section" style={{ marginBottom: "3rem", padding: "2rem", background: "rgba(0, 0, 0, 0.4)", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)" }}>
                   <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                     {archivedPending.map(pending => (
-                      <div key={`arch-${pending.id}`} className="admin-list-item" style={{ opacity: 0.7 }}>
+                      <div key={`arch-${pending.id}`} className="admin-list-item" style={{ opacity: 0.8, padding: "1rem", borderRadius: "12px", background: "rgba(0,0,0,0.2)" }}>
                         <div className="admin-list-header">
                           <span className="admin-col-number">عمود {pending.column}</span>
-                          <span className="banner-tag" style={{ background: pending.archiveStatus === 'مقبول' ? 'rgba(0,255,0,0.2)' : 'rgba(255,0,0,0.2)' }}>
-                            {pending.archiveStatus === 'مقبول' ? 'مقبول' : 'مرفوض'}
+                          <span className="banner-tag" style={{ background: pending.status === 'approved' ? 'rgba(0,255,0,0.2)' : 'rgba(255,0,0,0.2)' }}>
+                            {pending.status === 'approved' ? 'مقبول' : 'مرفوض'}
                           </span>
                         </div>
-                        <div className="admin-list-content">
-                          <div className="admin-detail-item"><strong>المواكب:</strong> {pending.names.join('، ')}</div>
-                          {pending.note && <div className="admin-detail-item"><strong>ملاحظة:</strong> {pending.note}</div>}
-                          <div className="admin-detail-item" style={{opacity: 0.5, fontSize: "0.8rem"}}>تاريخ الأرشفة: {new Date(pending.archivedAt).toLocaleString('ar-SA')}</div>
+                        <div className="admin-list-content" style={{ gap: '0.4rem' }}>
+                          <div className="admin-detail-item" style={{ fontSize: '0.9rem' }}><strong>الاسم:</strong> {pending.names.join('، ')}</div>
+                          {(() => {
+                              const noteStr = pending.note || "";
+                              if (!noteStr) return null;
+                              if (noteStr.startsWith("الخدمات: ")) {
+                                const srvs = noteStr.replace("الخدمات: ", "").split("، ");
+                                return (
+                                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginTop: '0.3rem' }}>
+                                    {srvs.map(srv => (
+                                      <span key={srv} className="banner-tag" style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', background: 'rgba(255,255,255,0.1)' }}>
+                                        {getServiceIcon(srv)} {srv}
+                                      </span>
+                                    ))}
+                                  </div>
+                                );
+                              }
+                              return <div className="admin-detail-item" style={{ fontSize: '0.85rem' }}><strong>ملاحظة:</strong> <span style={{ color: "var(--accent-color)" }}>{pending.note}</span></div>;
+                            })()}
+                          <div className="admin-detail-item" style={{ opacity: 0.5, fontSize: "0.75rem", marginTop: '0.3rem' }}>تاريخ الأرشفة: {new Date(pending.archivedAt).toLocaleString('ar-SA')}</div>
                         </div>
                       </div>
                     ))}
@@ -767,52 +1010,70 @@ export default function Home() {
           </div>
         )}
 
-        {isAdmin && adminView === 'reports' && (
-          <div className="admin-list-view" style={{ paddingTop: "100px" }}>
-            <div style={{ padding: '1rem', marginBottom: '1rem', display: 'flex' }}>
-              <button className="cancel-btn" onClick={() => setAdminView('main')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.1)', color: 'white' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                عودة للوحة التحكم
-              </button>
+        {effectiveIsAdmin && adminView === 'reports' && (
+          <div className="admin-list-view" style={{ paddingTop: "0" }}>
+            <div className="admin-tabs" style={{ display: "flex", gap: "1rem", marginBottom: "1rem", justifyContent: "center" }}>
+              <button className={`glass-tab-btn ${reportsTab === 'new' ? 'active' : ''}`} onClick={() => setReportsTab('new')}>الجديدة ({reports.length})</button>
+              {adminPassword === 'kmnt' && (
+                <button className={`glass-tab-btn ${reportsTab === 'archived' ? 'active' : ''}`} onClick={() => setReportsTab('archived')}>الأرشيف ({archivedReports.length})</button>
+              )}
             </div>
             
-            {reports.length > 0 ? (
-              <div className="reports-section" style={{ marginBottom: "3rem", padding: "2rem", background: "rgba(255, 0, 0, 0.1)", borderRadius: "16px", border: "1px solid #ff4444" }}>
-                <h3 style={{ color: "#ff4444", marginBottom: "1.5rem" }}>التعديلات المقترحة (البلاغات) ({reports.length})</h3>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {reports.map(report => (
-                    <div key={report.id} className="admin-list-item" style={{ background: "rgba(0,0,0,0.4)" }}>
-                      <div className="admin-list-header">
-                        <span className="admin-col-number">عمود {report.column}</span>
-                        <div className="admin-actions">
-                          <button className="primary-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.9rem" }} onClick={() => handleApproveReport(report.column, report.id)}>✏️ تعديل الموكب</button>
-                          <button className="delete-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.9rem" }} onClick={() => handleIgnoreReport(report.id)}>❌ تجاهل</button>
+            {reportsTab === 'new' ? (
+              reports.length > 0 ? (
+                <div className="reports-section" style={{ marginBottom: "3rem", padding: "2rem", background: "rgba(255, 0, 0, 0.1)", borderRadius: "16px", border: "1px solid #ff4444" }}>
+                  <h3 style={{ color: "#ff4444", marginBottom: "1.5rem" }}>التعديلات المقترحة (البلاغات) ({reports.length})</h3>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    {reports.map(report => (
+                      <div key={report.id} className="admin-list-item" style={{ background: "rgba(0,0,0,0.4)", padding: "1rem", borderRadius: "12px" }}>
+                        <div className="admin-list-header">
+                          <span className="admin-col-number">عمود {report.column}</span>
+                          <div className="admin-actions">
+                            <button className="primary-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.9rem" }} onClick={() => handleApproveReport(report.id)}>✅ تم التعديل</button>
+                            <button className="delete-btn" style={{ padding: "0.5rem 1rem", fontSize: "0.9rem" }} onClick={() => handleIgnoreReport(report.id)}>❌ تجاهل</button>
+                          </div>
+                        </div>
+                        <div className="admin-list-content">
+                          <div className="admin-detail-item"><strong>الملاحظة:</strong> {report.text}</div>
+                          <div className="admin-detail-item" style={{ opacity: 0.5, fontSize: "0.8rem" }}>تاريخ: {new Date(report.timestamp).toLocaleString('ar-SA')}</div>
                         </div>
                       </div>
-                      <div className="admin-list-content">
-                        <div className="admin-detail-item"><strong>الملاحظة:</strong> {report.text}</div>
-                        <div className="admin-detail-item" style={{opacity: 0.5, fontSize: "0.8rem"}}>تاريخ: {new Date(report.timestamp).toLocaleString('ar-SA')}</div>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div style={{ textAlign: "center", padding: "2rem", color: "var(--text-muted)", fontSize: "1.2rem" }}>لا توجد اقتراحات أو بلاغات جديدة.</div>
+              )
             ) : (
-              <div style={{ textAlign: "center", padding: "2rem", color: "var(--text-muted)", fontSize: "1.2rem" }}>لا توجد اقتراحات أو بلاغات جديدة.</div>
+              archivedReports.length > 0 ? (
+                <div className="reports-section" style={{ marginBottom: "3rem", padding: "2rem", background: "rgba(255, 255, 255, 0.05)", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    {archivedReports.map(report => (
+                      <div key={report.id} className="admin-list-item glass" style={{ padding: "1rem", borderRadius: "12px" }}>
+                        <div className="admin-list-header">
+                          <span className="admin-col-number">عمود {report.column}</span>
+                        </div>
+                        <div className="admin-list-content">
+                          <div className="admin-detail-item"><strong>الملاحظة:</strong> {report.text}</div>
+                          <div className="admin-detail-item" style={{ opacity: 0.5, fontSize: "0.8rem" }}>
+                            الحالة: {report.status === 'approved' ? '✅ تم الاعتماد' : '❌ تم التجاهل'} | 
+                            تاريخ: {new Date(report.timestamp).toLocaleString('ar-SA')} | 
+                            أرشفة: {new Date(report.archivedAt).toLocaleString('ar-SA')}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div style={{ textAlign: "center", padding: "2rem", color: "var(--text-muted)", fontSize: "1.2rem" }}>الأرشيف فارغ.</div>
+              )
             )}
           </div>
         )}
-        
-        {isAdmin && adminView === 'columns' && (
-          <div className="admin-list-view" style={{ paddingTop: "100px" }}>
-            <div style={{ padding: '1rem', marginBottom: '1rem', display: 'flex' }}>
-              <button className="cancel-btn" onClick={() => setAdminView('main')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.1)', color: 'white' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                عودة للوحة التحكم
-              </button>
-            </div>
-            <h3 style={{ color: "white", marginBottom: "1rem" }}>إدارة الأعمدة</h3>
 
+        {effectiveIsAdmin && adminView === 'columns' && (
+          <div className="admin-list-view" style={{ paddingTop: "0" }}>
             {filteredMoukebs.length === 0 ? (
               <div style={{ textAlign: "center", padding: "2rem", color: "var(--text-muted)" }}>لا توجد نتائج مطابقة لبحثك.</div>
             ) : (
@@ -827,8 +1088,8 @@ export default function Home() {
                   <div className="admin-list-content" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: '1rem' }}>
                     {col.names.map((name: string, i: number) => {
                       const allNotes = col.note ? col.note.split(' - ') : [];
-                      const moukebServices = allNotes[i] ? allNotes[i].replace('الخدمات:', '').trim().split('،').map((s:string) => s.trim()).filter((s:string) => s) : [];
-                      
+                      const moukebServices = allNotes[i] ? allNotes[i].replace('الخدمات:', '').trim().split('،').map((s: string) => s.trim()).filter((s: string) => s) : [];
+
                       return (
                         <div key={i} style={{ border: '1px solid rgba(255, 255, 255, 0.2)', padding: '1rem', borderRadius: '12px', background: 'rgba(255, 255, 255, 0.03)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -867,132 +1128,133 @@ export default function Home() {
               ))
             )}
           </div>
-        )} 
+        )}
 
- {(!isAdmin || adminView === 'columns') && ( 
- <div className="columns-grid">
+        {(!effectiveIsAdmin || adminView === 'columns') && (
+          <div className="columns-grid">
             {filteredMoukebs.length === 0 ? (
               <div style={{ textAlign: "center", width: "100%", padding: "2rem", color: "var(--text-muted)" }}>لا توجد نتائج مطابقة لبحثك.</div>
             ) : (
               filteredMoukebs.map(col => (
                 <div key={col.column} style={{ display: 'flex', flexDirection: 'column', gridColumn: expandedCol === col.column ? '1 / -1' : 'auto' }}>
-                  <div 
+                  <div
                     className={`column-card glass ${expandedCol === col.column ? 'expanded' : ''}`}
                     style={expandedCol === col.column ? { marginBottom: '0.5rem' } : undefined}
-                  onClick={(e) => {
-                    setExpandedCol(expandedCol === col.column ? null : col.column);
-                  }}
-                >
-                  <div className={`card-top-row ${expandedCol === col.column ? 'is-expanded' : 'is-closed'}`}>
-                    {expandedCol === col.column && (
-                    <div className="smart-badges-container">
-                      {(() => {
-                        const noteParts = col.note ? col.note.split(' - ') : [];
-                        return col.names.map((name: string, index: number) => {
-                          const isService = allKnownServices.includes(name);
-                          if (isService) {
-                            return (
-                              <div key={`item-${index}`} className="smart-badge badge-service">
-                                <div className="badge-icon-wrapper">
-                                  {getServiceIcon(name)}
-                                </div>
-                                <span className="badge-text">{name}</span>
-                              </div>
-                            );
-                          } else {
-                            const notePart = noteParts[index] || '';
-                            const services = notePart.replace('الخدمات:', '').split(/[،,]/).map((s: string) => s.trim()).filter(Boolean);
-                            return (
-                              <div key={`item-${index}`} className="moukeb-unified-block">
-                                <div className="moukeb-unified-title" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
-                                  <div className="badge-icon-wrapper">
-                                    {getServiceIcon(name)}
-                                  </div>
-                                  <span className="moukeb-unified-text">{name}</span>
-                                  {col.country && index === 0 && (
-                                    <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 'normal', display: 'flex', alignItems: 'center', gap: '0.2rem', background: 'rgba(255,255,255,0.05)', padding: '0.1rem 0.5rem', borderRadius: '10px' }}>
-                                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="10" r="3"/><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/></svg>
-                                      {col.country}
-                                    </span>
-                                  )}
-                                  {services.length > 0 && (
-                                    <div style={{ display: 'flex', gap: '0.3rem', marginRight: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                                      {services.map((srv: string, i: number) => (
-                                        <div key={i} title={srv} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--accent-color)', fontSize: '0.75rem', background: 'rgba(255, 0, 0, 0.05)', padding: '0.15rem 0.5rem', borderRadius: '15px', border: '1px solid rgba(255, 0, 0, 0.2)' }}>
-                                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '14px', height: '14px' }}>
-                                            {getServiceIcon(srv)}
-                                          </div>
-                                          <span style={{ whiteSpace: 'nowrap' }}>{srv}</span>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  )}
-                                </div>
-                                
-
-                              </div>
-                            );
-                          }
-                        });
-                      })()}
-                    </div>
-                    )}
-                    <div className="col-number-block">
-                      <span className="col-label">عمود</span>
-                      <span className="col-number">{col.column}</span>
-                      {expandedCol !== col.column && (col.names.length > 0 || col.note) && (
-                        <div className="col-closed-icons">
+                    onClick={(e) => {
+                      setExpandedCol(expandedCol === col.column ? null : col.column);
+                    }}
+                  >
+                    <div className={`card-top-row ${expandedCol === col.column ? 'is-expanded' : 'is-closed'}`}>
+                      {expandedCol === col.column && (
+                        <div className="smart-badges-container">
                           {(() => {
-                             let rawIcons: string[] = [...col.names];
-                             if (col.note) {
-                               const extracted = col.note.replaceAll('الخدمات:', '').replaceAll('-', ' ').split(/[،,]/).map((s: string) => s.trim()).filter(Boolean);
-                               rawIcons = [...rawIcons, ...extracted];
-                             }
-                             
-                             const normalized = rawIcons.map(n => {
-                               if (allKnownServices.includes(n) || ["دورات مياه"].includes(n)) return n;
-                               if (n.includes("مياه")) return "مياه شرب";
-                               if (n.includes("مبيت")) return "مبيت";
-                               if (n.includes("ضيافة")) return "ضيافة";
-                               if (n.includes("غسيل")) return "غسيل ملابس";
-                               if (n.includes("طبية") || n.includes("علاج")) return "مفرزة طبية";
-                               if (n.includes("مفقودين")) return "مركز المفقودين";
-                               if (n.includes("اتصالات")) return "مركز اتصالات";
-                               if (n.includes("استفتاءات")) return "استفتاءات شرعية";
-                               if (n.includes("صيانة") || n.includes("تصليح")) return "صيانة عربات";
-                               if (n.includes("خياطة")) return "خياطة";
-                               if (n.includes("شحن") || n.includes("هواتف")) return "شحن هواتف";
-                               if (n.includes("إنترنت") || n.includes("انترنت")) return "إنترنت مجاني";
-                               return "موكب أو حسينية";
-                             });
-                             
-                             const counts: Record<string, number> = {};
-                             normalized.forEach(n => {
-                               counts[n] = (counts[n] || 0) + 1;
-                             });
-                             
-                             const iconsArray = Object.entries(counts);
-                             
-                             return (
-                               <>
-                                 {iconsArray.slice(0, 5).map(([name, count], i) => (
-                                   <span key={i} className="closed-icon-wrapper" title={name}>
-                                     {getServiceIcon(name)}
-                                     {count > 1 && <span className="icon-badge">{count}</span>}
-                                   </span>
-                                 ))}
-                                 {iconsArray.length > 5 && <span className="closed-icon-wrapper-more">+{iconsArray.length - 5}</span>}
-                               </>
-                             );
+                            const noteParts = col.note ? col.note.split(' - ') : [];
+                            return col.names.map((name: string, index: number) => {
+                              const isService = allKnownServices.includes(name);
+                              if (isService) {
+                                return (
+                                  <div key={`item-${index}`} className="smart-badge badge-service">
+                                    <div className="badge-icon-wrapper">
+                                      {getServiceIcon(name)}
+                                    </div>
+                                    <span className="badge-text">{name}</span>
+                                  </div>
+                                );
+                              } else {
+                                const notePart = noteParts[index] || '';
+                                const services = notePart.replace('الخدمات:', '').split(/[،,]/).map((s: string) => s.trim()).filter(Boolean);
+                                return (
+                                  <div key={`item-${index}`} className="moukeb-unified-block">
+                                    <div className="moukeb-unified-title" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
+                                      <div className="badge-icon-wrapper">
+                                        {getServiceIcon(name)}
+                                      </div>
+                                      <span className="moukeb-unified-text">{name}</span>
+                                      {col.country && index === 0 && (
+                                        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 'normal', display: 'flex', alignItems: 'center', gap: '0.2rem', background: 'rgba(255,255,255,0.05)', padding: '0.1rem 0.5rem', borderRadius: '10px' }}>
+                                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="10" r="3" /><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /></svg>
+                                          {col.country}
+                                        </span>
+                                      )}
+                                      {services.length > 0 && (
+                                        <div style={{ display: 'flex', gap: '0.3rem', marginRight: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                                          {services.map((srv: string, i: number) => (
+                                            <div key={i} title={srv} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: 'var(--accent-color)', fontSize: '0.75rem', background: 'rgba(255, 0, 0, 0.05)', padding: '0.15rem 0.5rem', borderRadius: '15px', border: '1px solid rgba(255, 0, 0, 0.2)' }}>
+                                              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '14px', height: '14px' }}>
+                                                {getServiceIcon(srv)}
+                                              </div>
+                                              <span style={{ whiteSpace: 'nowrap' }}>{srv}</span>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      )}
+                                    </div>
+
+
+                                  </div>
+                                );
+                              }
+                            });
                           })()}
                         </div>
                       )}
+                      <div className="col-number-block">
+                        <span className="col-label">عمود</span>
+                        <span className="col-number">{col.column}</span>
+                        {expandedCol !== col.column && (col.names.length > 0 || col.note) && (
+                          <div className="col-closed-icons">
+                            {(() => {
+                              let rawIcons: string[] = [...col.names];
+                              if (col.note) {
+                                const extracted = col.note.replaceAll('الخدمات:', '').replaceAll('-', ' ').split(/[،,]/).map((s: string) => s.trim()).filter(Boolean);
+                                rawIcons = [...rawIcons, ...extracted];
+                              }
+
+                              const normalized = rawIcons.map(n => {
+                                if (allKnownServices.includes(n) || ["دورات مياه"].includes(n)) return n;
+                                if (n.includes("مياه")) return "مياه شرب";
+                                if (n.includes("مبيت")) return "مبيت";
+                                if (n.includes("ضيافة")) return "ضيافة وطعام";
+                                if (n.includes("غسيل")) return "غسيل ملابس";
+                                if (n.includes("طبية") || n.includes("علاج")) return "مفرزة طبية";
+                                if (n.includes("مفقودين")) return "مركز المفقودين";
+                                if (n.includes("اتصالات")) return "مركز اتصالات";
+                                if (n.includes("استفتاءات")) return "استفتاءات شرعية";
+                                if (n.includes("صيانة") || n.includes("تصليح")) return "صيانة عربات";
+                                if (n.includes("خياطة")) return "خياطة";
+                                if (n.includes("شحن") || n.includes("هواتف")) return "شحن هواتف";
+                                if (n.includes("إنترنت") || n.includes("انترنت")) return "إنترنت مجاني";
+                                if (n.includes("موكب") || n.includes("حسينية") || n.includes("نقطة") || n.includes("مضيف") || n.includes("مخيم") || n.includes("مسجد") || n.includes("جامع")) return "موكب أو حسينية";
+                                return "خدمات أخرى";
+                              });
+
+                              const counts: Record<string, number> = {};
+                              normalized.forEach(n => {
+                                counts[n] = (counts[n] || 0) + 1;
+                              });
+
+                              const iconsArray = Object.entries(counts);
+
+                              return (
+                                <>
+                                  {iconsArray.slice(0, 5).map(([name, count], i) => (
+                                    <span key={i} className="closed-icon-wrapper" title={name}>
+                                      {getServiceIcon(name)}
+                                      {count > 1 && <span className="icon-badge">{count}</span>}
+                                    </span>
+                                  ))}
+                                  {iconsArray.length > 5 && <span className="closed-icon-wrapper-more">+{iconsArray.length - 5}</span>}
+                                </>
+                              );
+                            })()}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
                   </div>
                   {expandedCol === col.column && (
                     <div className="report-trigger-container" style={{ display: 'flex', justifyContent: 'flex-start', padding: '0 1rem', marginBottom: '1rem' }}>
-                      <button 
+                      <button
                         className="report-trigger-btn"
                         onClick={(e) => {
                           e.stopPropagation();
@@ -1014,27 +1276,20 @@ export default function Home() {
             )}
           </div>
         )}
-        {isAdmin && adminView === 'services' && (
-          <div className="admin-list-view" style={{ maxWidth: '800px', margin: '0 auto', paddingTop: "100px" }}>
-            <div style={{ padding: '1rem', marginBottom: '1rem', display: 'flex' }}>
-              <button className="cancel-btn" onClick={() => setAdminView('main')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.1)', color: 'white' }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                عودة للوحة التحكم
-              </button>
-            </div>
+        {effectiveIsAdmin && adminView === 'services' && (
+          <div className="admin-list-view" style={{ maxWidth: '800px', margin: '0 auto', paddingTop: "0" }}>
             <div className="glass" style={{ padding: '2rem', borderRadius: '20px' }}>
-              <h2 className="text-gradient" style={{ marginBottom: '1.5rem' }}>إعدادات الخدمات</h2>
               <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap', alignItems: 'stretch' }}>
                 <select id="newServiceGroup" style={{ flex: '1 1 200px', padding: '1rem', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', color: 'white', border: '1px solid rgba(255,255,255,0.1)', fontFamily: 'Cairo', outline: 'none' }}>
                   {Object.keys(knownServices).map(cat => <option key={cat} value={cat} style={{ background: '#222', color: 'white' }}>{cat}</option>)}
                 </select>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   id="newServiceInput"
-                  placeholder="اسم الخدمة الجديدة..." 
+                  placeholder="اسم الخدمة الجديدة..."
                   style={{ flex: '2 1 300px', padding: '1rem', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', color: 'white', border: '1px solid rgba(255,255,255,0.1)', fontFamily: 'Cairo', outline: 'none' }}
                 />
-                <button 
+                <button
                   className="primary-btn"
                   style={{ flex: '1 1 150px' }}
                   onClick={async () => {
@@ -1060,7 +1315,7 @@ export default function Home() {
                   إضافة خدمة
                 </button>
               </div>
-              
+
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {Object.keys(knownServices).map(category => (
                   <div key={category} style={{ background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '15px' }}>
@@ -1076,7 +1331,7 @@ export default function Home() {
                             <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', background: 'rgba(255,255,255,0.05)', padding: '0.2rem 0.5rem', borderRadius: '5px' }}>أساسي</span>
                           ) : (
                             <div style={{ display: 'flex', gap: '0.8rem' }}>
-                              <button 
+                              <button
                                 onClick={async () => {
                                   const newName = prompt(`تعديل اسم الخدمة "${srv}":`, srv);
                                   if (newName && newName.trim() && newName.trim() !== srv) {
@@ -1097,7 +1352,7 @@ export default function Home() {
                               >
                                 تعديل
                               </button>
-                              <button 
+                              <button
                                 onClick={async () => {
                                   if (confirm(`هل أنت متأكد من حذف خدمة "${srv}" من "${category}"؟`)) {
                                     const updatedServices = { ...knownServices };
@@ -1121,7 +1376,7 @@ export default function Home() {
                     </div>
                   </div>
                 ))}
-</div>
+              </div>
             </div>
           </div>
         )}
@@ -1130,17 +1385,32 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="app-footer">
+      <footer className="app-footer" style={{ paddingBottom: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <p className="footer-text">مَشّاية .. من أعمال خادم</p>
-        <div className="footer-logos">
+        <div className="footer-logos" style={{ marginBottom: '1.5rem' }}>
           <MashayaLogo className="footer-logo" />
           <span className="footer-arrow">←</span>
           <SecondaryLogo className="footer-secondary-logo" />
         </div>
+        
+        <div style={{ width: '80%', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '1rem', textAlign: 'center' }}>
+          <a href="mailto:khademcrs@gmail.com" style={{
+            fontSize: '0.65rem', 
+            color: 'var(--text-muted)', 
+            textDecoration: 'none', 
+            opacity: 0.5,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.3rem'
+          }}>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            للتواصل والمقترحات: khademcrs@gmail.com
+          </a>
+        </div>
       </footer>
 
-      
-      
+
+
       {/* Report Modal */}
       {reportModalOpen && (
         <div className="modal-overlay" onClick={() => !isSubmittingReport && setReportModalOpen(false)}>
@@ -1148,7 +1418,7 @@ export default function Home() {
             <h2 className="text-gradient" style={{ marginBottom: '1.5rem' }}>إبلاغ عن بيانات غير دقيقة (عمود {reportColumn})</h2>
             <form onSubmit={handleReportSubmit}>
               <div className="form-group">
-                <textarea 
+                <textarea
                   required
                   placeholder="اكتب الملاحظة أو التعديل الصحيح هنا..."
                   className="search-input"
@@ -1202,8 +1472,8 @@ export default function Home() {
               يمكنك تحديد أكثر من خدمة، وسيعرض النظام الأعمدة التي تحتوي على <strong>جميع</strong> الخدمات المحددة معاً.
             </p>
             <div className="filter-options-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
-              {["موكب أو حسينية", ...allKnownServices, "دورات مياه", "مبيت", "ضيافة", "غسيل ملابس"].map(ft => (
-                <button 
+              {Array.from(new Set(["موكب أو حسينية", ...allKnownServices, "دورات مياه", "مبيت", "ضيافة وطعام", "غسيل ملابس"])).map(ft => (
+                <button
                   key={ft}
                   className={`filter-pill ${tempFilters.includes(ft) ? 'active' : ''}`}
                   onClick={() => {
@@ -1228,7 +1498,7 @@ export default function Home() {
           <div className="modal-content glass" onClick={e => e.stopPropagation()} style={{ textAlign: "center" }}>
             <h2 style={{ color: "#4ade80", marginBottom: "1rem" }}>🟢 تم استلام الطلب بنجاح</h2>
             <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", lineHeight: "1.6", marginBottom: "2rem" }}>
-              شكراً لمساهمتك. تم إرسال بيانات الإضافة وهي الآن قيد المراجعة.<br/>
+              شكراً لمساهمتك. تم إرسال بيانات الإضافة وهي الآن قيد المراجعة.<br />
               يرجى عدم إرسال الطلب مرة أخرى؛ سيتم إدراج المعلومات في الموقع فور التحقق منها واعتمادها.
             </p>
             <button className="primary-btn" onClick={() => setShowSuccessModal(false)}>حسناً، فهمت</button>
@@ -1249,10 +1519,10 @@ export default function Home() {
                       <stop offset="100%" stopColor="#ff0000" />
                     </linearGradient>
                   </defs>
-                  <path fill="url(#khadimGradient)" d="M75.2,12.8l-16.3,15.4c-.6.6-.9,1.3-.9,2.1l-.2,13.5h5.2c0,0,.2-12.5.2-12.5l6.7-6.3-3.8,26h-11.3l-.2-20c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9l.2,24.3c0,.5.4.9.9.9h22.2c.5,0,.9-.4.9-.9v-3.4c0-.5-.4-.9-.9-.9h-1.4l5.5-37.5c.1-.8-.9-1.3-1.5-.8Z"/>
-                  <path fill="url(#khadimGradient)" d="M38.8,30.4c-3.6,0-6.5,2.9-6.5,6.5v.3c0,.5.4.9.9.9h3.4c.5,0,.9-.4.9-.9v-.3c0-.7.6-1.3,1.3-1.3h2.1v15.5c0,0-3.4,0-3.4,0v-6.4c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9v10.7c0,.5.4.9.9.9h12.1c.5,0,.9-.4.9-.9v-24.1c-.1-.5-.5-.9-1-.9h-6.3Z"/>
-                  <path fill="url(#khadimGradient)" d="M15.9,51.1h-1.8c-.5,0-.9.4-.9.9v3.4c0,.5.4.9.9.9h14.6c.5,0,.9-.4.9-.9v-24.9c0-.9-.4-1.7-1-2.3L11.4,13c-.6-.5-1.6,0-1.5.8l6,37.3ZM24.4,31.4v19.7h-3.3l-4.2-26.3,7.5,6.6Z"/>
-                  <path fill="url(#khadimGradient)" d="M56.9,23.3h0c1.7,0,3-1.4,3-3.1h0s0,0,0,0c0-1.7-1.4-3-3.1-3h0c-1.7,0-3,1.4-3,3.1h0s0,0,0,0c0,1.7,1.4,3,3.1,3h0Z"/>
+                  <path fill="url(#khadimGradient)" d="M75.2,12.8l-16.3,15.4c-.6.6-.9,1.3-.9,2.1l-.2,13.5h5.2c0,0,.2-12.5.2-12.5l6.7-6.3-3.8,26h-11.3l-.2-20c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9l.2,24.3c0,.5.4.9.9.9h22.2c.5,0,.9-.4.9-.9v-3.4c0-.5-.4-.9-.9-.9h-1.4l5.5-37.5c.1-.8-.9-1.3-1.5-.8Z" />
+                  <path fill="url(#khadimGradient)" d="M38.8,30.4c-3.6,0-6.5,2.9-6.5,6.5v.3c0,.5.4.9.9.9h3.4c.5,0,.9-.4.9-.9v-.3c0-.7.6-1.3,1.3-1.3h2.1v15.5c0,0-3.4,0-3.4,0v-6.4c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9v10.7c0,.5.4.9.9.9h12.1c.5,0,.9-.4.9-.9v-24.1c-.1-.5-.5-.9-1-.9h-6.3Z" />
+                  <path fill="url(#khadimGradient)" d="M15.9,51.1h-1.8c-.5,0-.9.4-.9.9v3.4c0,.5.4.9.9.9h14.6c.5,0,.9-.4.9-.9v-24.9c0-.9-.4-1.7-1-2.3L11.4,13c-.6-.5-1.6,0-1.5.8l6,37.3ZM24.4,31.4v19.7h-3.3l-4.2-26.3,7.5,6.6Z" />
+                  <path fill="url(#khadimGradient)" d="M56.9,23.3h0c1.7,0,3-1.4,3-3.1h0s0,0,0,0c0-1.7-1.4-3-3.1-3h0c-1.7,0-3,1.4-3,3.1h0s0,0,0,0c0,1.7,1.4,3,3.1,3h0Z" />
                 </svg>
               </div>
             </div>
@@ -1260,9 +1530,9 @@ export default function Home() {
             <form onSubmit={handleAdminLogin} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
               <div className="form-group" style={{ textAlign: "right" }}>
                 <div style={{ position: "relative" }}>
-                  <input 
-                    type="password" 
-                    required 
+                  <input
+                    type="password"
+                    required
                     value={adminPassword}
                     onChange={e => setAdminPassword(e.target.value)}
                     className="search-input"
@@ -1274,7 +1544,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div style={{ color: "var(--accent-color)", fontStyle: "italic", marginTop: "1rem", fontSize: "0.95rem", textAlign: "center", opacity: 0.9 }}>
-                  "شرفُ الخادم.. نسبُه إلى مولاه"
+                  &quot;شرفُ الخادم.. نسبُه إلى مولاه&quot;
                 </div>
               </div>
               <div className="form-actions" style={{ display: "flex", flexDirection: "row", gap: "0.8rem", marginTop: "0.5rem" }}>
@@ -1290,33 +1560,33 @@ export default function Home() {
       {isEditModalOpen && editingMoukeb && (
         <div className="modal-overlay" onClick={() => !isSubmitting && setIsEditModalOpen(false)}>
           <div className="modal-content glass" onClick={e => e.stopPropagation()} style={{ maxWidth: '600px', maxHeight: '90vh', overflowY: 'auto' }}>
-            
+
             <div>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
                 <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
                 </button>
                 <h2 className="text-gradient" style={{ margin: 0 }}>تعديل الموكب والخدمات</h2>
               </div>
-              
+
               <form onSubmit={handleEditSubmit}>
                 <div className="form-group" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', marginBottom: '0.8rem' }}>
                   <label style={{ fontSize: '0.9rem', margin: 0, color: 'var(--text-color)', fontWeight: 'bold' }}>رقم العمود *</label>
-                  <input 
+                  <input
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
                     maxLength={4}
-                    required 
+                    required
                     value={editingMoukeb.column || ''}
                     onChange={e => {
                       const val = e.target.value.replace(/[^0-9]/g, '');
                       setEditingMoukeb({ ...editingMoukeb, column: val ? parseInt(val) : 0 });
-                    }} 
+                    }}
                     placeholder="0000"
-                    style={{ 
-                      fontSize: '1.5rem', 
-                      textAlign: 'center', 
+                    style={{
+                      fontSize: '1.5rem',
+                      textAlign: 'center',
                       letterSpacing: '2px',
                       padding: '0.4rem',
                       borderRadius: '12px',
@@ -1338,80 +1608,75 @@ export default function Home() {
                     }}
                   />
                 </div>
-                
-                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+
+                <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.8rem', flexWrap: 'wrap' }}>
                   <div className="form-group" style={{ flex: '2 1 200px', marginBottom: 0 }}>
-                    <label>الموكب / الحسينية / المركز (اختياري)</label>
-                    <textarea 
+                    <label style={{ fontSize: '0.7rem' }}>الموكب / الحسينية (اختياري)</label>
+                    <textarea
                       value={editingMoukeb.name}
-                      onChange={e => setEditingMoukeb({ ...editingMoukeb, name: e.target.value })} 
+                      onChange={e => setEditingMoukeb({ ...editingMoukeb, name: e.target.value })}
                       placeholder="(اتركه فارغاً إذا كان نقطة خدمة فردية)"
                       rows={1}
-                      style={{ resize: 'vertical', minHeight: '40px', fontSize: '0.9rem', padding: '0.6rem' }}
+                      style={{ resize: 'vertical', minHeight: '30px', fontSize: '0.8rem', padding: '0.4rem' }}
                     />
                   </div>
                   <div className="form-group" style={{ flex: '1 1 120px', marginBottom: 0 }}>
-                    <label>البلدة (اختياري)</label>
-                    <textarea 
+                    <label style={{ fontSize: '0.7rem' }}>البلدة (اختياري)</label>
+                    <textarea
                       value={editingMoukeb.country || ''}
-                      onChange={e => setEditingMoukeb({ ...editingMoukeb, country: e.target.value })} 
+                      onChange={e => setEditingMoukeb({ ...editingMoukeb, country: e.target.value })}
                       placeholder="مثل: البحرين"
                       rows={1}
-                      style={{ resize: 'vertical', minHeight: '40px', fontSize: '0.9rem', padding: '0.6rem' }}
+                      style={{ resize: 'vertical', minHeight: '30px', fontSize: '0.8rem', padding: '0.4rem' }}
                     />
                   </div>
                 </div>
-                
+
                 <div className="form-group">
-                  
-                  {Object.keys(knownServices).map(category => (
-                    <div key={category} style={{ marginBottom: '1.2rem' }}>
-                      <div style={{ fontSize: '0.85rem', color: 'var(--accent-color)', marginBottom: '0.5rem' }}>{category}:</div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                        {knownServices[category].map(srv => (
-                          <button 
-                            type="button" 
-                            key={srv}
-                            onClick={() => {
-                              const hasSrv = editingMoukeb.services.includes(srv);
-                              const newServices = hasSrv 
-                                ? editingMoukeb.services.filter(s => s !== srv)
-                                : [...editingMoukeb.services, srv];
-                              setEditingMoukeb({ ...editingMoukeb, services: newServices });
-                            }}
-                            style={{
-                              padding: '0.4rem 0.8rem', borderRadius: '20px', border: '1px solid var(--accent-color)',
-                              background: editingMoukeb.services.includes(srv) ? 'var(--accent-color)' : 'transparent',
-                              color: editingMoukeb.services.includes(srv) ? 'white' : 'var(--text-color)',
-                              cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.85rem', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '0.4rem'
-                            }}
-                          >
-                            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '16px', height: '16px' }}>{getServiceIcon(srv)}</span>
-                            {srv}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                  <label style={{ fontSize: '0.8rem' }}>اختر الخدمات المتوفرة</label>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.8rem' }}>
+                    {allKnownServices.map(srv => (
+                      <button
+                        type="button"
+                        key={srv}
+                        onClick={() => {
+                          const hasSrv = editingMoukeb.services.includes(srv);
+                          const newServices = hasSrv
+                            ? editingMoukeb.services.filter(s => s !== srv)
+                            : [...editingMoukeb.services, srv];
+                          setEditingMoukeb({ ...editingMoukeb, services: newServices });
+                        }}
+                        style={{
+                          padding: '0.25rem 0.5rem', borderRadius: '15px', border: '1px solid var(--accent-color)',
+                          background: editingMoukeb.services.includes(srv) ? 'var(--accent-color)' : 'transparent',
+                          color: editingMoukeb.services.includes(srv) ? 'white' : 'var(--text-color)',
+                          cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.75rem', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '0.3rem'
+                        }}
+                      >
+                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '12px', height: '12px' }}>{getServiceIcon(srv)}</span>
+                        {srv}
+                      </button>
+                    ))}
+                  </div>
 
                   <div style={{ marginTop: '0.8rem', display: 'flex', justifyContent: 'center' }}>
-                    <button 
+                    <button
                       type="button"
                       onClick={() => {
                         const newService = prompt("أدخل اسم الخدمة الجديدة:");
                         if (newService && newService.trim() !== "") {
-                           const srvName = newService.trim();
-                           setKnownServices(prev => {
-                             const newState = { ...prev };
-                             if (!newState["خدمات مضافة"]) newState["خدمات مضافة"] = [];
-                             if (!newState["خدمات مضافة"].includes(srvName)) {
-                               newState["خدمات مضافة"].push(srvName);
-                             }
-                             return newState;
-                           });
-                           if (!editingMoukeb.services.includes(srvName)) {
-                             setEditingMoukeb({ ...editingMoukeb, services: [...editingMoukeb.services, srvName] });
-                           }
+                          const srvName = newService.trim();
+                          setKnownServices(prev => {
+                            const newState = { ...prev };
+                            if (!newState["خدمات مضافة"]) newState["خدمات مضافة"] = [];
+                            if (!newState["خدمات مضافة"].includes(srvName)) {
+                              newState["خدمات مضافة"].push(srvName);
+                            }
+                            return newState;
+                          });
+                          if (!editingMoukeb.services.includes(srvName)) {
+                            setEditingMoukeb({ ...editingMoukeb, services: [...editingMoukeb.services, srvName] });
+                          }
                         }
                       }}
                       style={{
@@ -1426,7 +1691,7 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="form-actions" style={{ display: "flex", flexDirection: "row", gap: "0.8rem", marginTop: "1rem" }}>
                   <button type="submit" className="primary-btn" disabled={isSubmitting} style={{ flex: 2, display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', padding: "0.8rem", fontSize: "1.1rem" }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
@@ -1440,11 +1705,11 @@ export default function Home() {
         </div>
       )}
 
-{/* Add Service Modal */}
+      {/* Add Service Modal */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={() => !isSubmitting && setIsModalOpen(false)}>
           <div className="modal-content glass" onClick={e => e.stopPropagation()} style={{ maxWidth: '600px', maxHeight: '90vh', overflowY: 'auto' }}>
-            
+
             {addStep === 1 && (
               <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
@@ -1455,10 +1720,10 @@ export default function Home() {
                         <stop offset="100%" stopColor="#ff0000" />
                       </linearGradient>
                     </defs>
-                    <path fill="url(#khadimGradientModal)" d="M75.2,12.8l-16.3,15.4c-.6.6-.9,1.3-.9,2.1l-.2,13.5h5.2c0,0,.2-12.5.2-12.5l6.7-6.3-3.8,26h-11.3l-.2-20c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9l.2,24.3c0,.5.4.9.9.9h22.2c.5,0,.9-.4.9-.9v-3.4c0-.5-.4-.9-.9-.9h-1.4l5.5-37.5c.1-.8-.9-1.3-1.5-.8Z"/>
-                    <path fill="url(#khadimGradientModal)" d="M38.8,30.4c-3.6,0-6.5,2.9-6.5,6.5v.3c0,.5.4.9.9.9h3.4c.5,0,.9-.4.9-.9v-.3c0-.7.6-1.3,1.3-1.3h2.1v15.5c0,0-3.4,0-3.4,0v-6.4c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9v10.7c0,.5.4.9.9.9h12.1c.5,0,.9-.4.9-.9v-24.1c-.1-.5-.5-.9-1-.9h-6.3Z"/>
-                    <path fill="url(#khadimGradientModal)" d="M15.9,51.1h-1.8c-.5,0-.9.4-.9.9v3.4c0,.5.4.9.9.9h14.6c.5,0,.9-.4.9-.9v-24.9c0-.9-.4-1.7-1-2.3L11.4,13c-.6-.5-1.6,0-1.5.8l6,37.3ZM24.4,31.4v19.7h-3.3l-4.2-26.3,7.5,6.6Z"/>
-                    <path fill="url(#khadimGradientModal)" d="M56.9,23.3h0c1.7,0,3-1.4,3-3.1h0s0,0,0,0c0-1.7-1.4-3-3.1-3h0c-1.7,0-3,1.4-3,3.1h0s0,0,0,0c0,1.7,1.4,3,3.1,3h0Z"/>
+                    <path fill="url(#khadimGradientModal)" d="M75.2,12.8l-16.3,15.4c-.6.6-.9,1.3-.9,2.1l-.2,13.5h5.2c0,0,.2-12.5.2-12.5l6.7-6.3-3.8,26h-11.3l-.2-20c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9l.2,24.3c0,.5.4.9.9.9h22.2c.5,0,.9-.4.9-.9v-3.4c0-.5-.4-.9-.9-.9h-1.4l5.5-37.5c.1-.8-.9-1.3-1.5-.8Z" />
+                    <path fill="url(#khadimGradientModal)" d="M38.8,30.4c-3.6,0-6.5,2.9-6.5,6.5v.3c0,.5.4.9.9.9h3.4c.5,0,.9-.4.9-.9v-.3c0-.7.6-1.3,1.3-1.3h2.1v15.5c0,0-3.4,0-3.4,0v-6.4c0-.5-.4-.9-.9-.9h-3.4c-.5,0-.9.4-.9.9v10.7c0,.5.4.9.9.9h12.1c.5,0,.9-.4.9-.9v-24.1c-.1-.5-.5-.9-1-.9h-6.3Z" />
+                    <path fill="url(#khadimGradientModal)" d="M15.9,51.1h-1.8c-.5,0-.9.4-.9.9v3.4c0,.5.4.9.9.9h14.6c.5,0,.9-.4.9-.9v-24.9c0-.9-.4-1.7-1-2.3L11.4,13c-.6-.5-1.6,0-1.5.8l6,37.3ZM24.4,31.4v19.7h-3.3l-4.2-26.3,7.5,6.6Z" />
+                    <path fill="url(#khadimGradientModal)" d="M56.9,23.3h0c1.7,0,3-1.4,3-3.1h0s0,0,0,0c0-1.7-1.4-3-3.1-3h0c-1.7,0-3,1.4-3,3.1h0s0,0,0,0c0,1.7,1.4,3,3.1,3h0Z" />
                   </svg>
                 </div>
                 <div style={{ color: "var(--accent-color)", fontStyle: "italic", marginBottom: "1.5rem", fontSize: "1.2rem", fontWeight: "bold" }}>
@@ -1475,34 +1740,34 @@ export default function Home() {
                 </div>
               </div>
             )}
-            
+
             {addStep === 2 && (
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem', gap: '1rem' }}>
                   <button type="button" onClick={() => setAddStep(1)} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
                   </button>
                   <h2 className="text-gradient" style={{ margin: 0 }}>إضافة خدمة جديدة</h2>
                 </div>
-                
+
                 <form onSubmit={handleAddMoukeb}>
                   <div className="form-group" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', marginBottom: '0.8rem' }}>
                     <label style={{ fontSize: '0.9rem', margin: 0, color: 'var(--text-color)', fontWeight: 'bold' }}>رقم العمود *</label>
-                    <input 
+                    <input
                       type="text"
                       inputMode="numeric"
                       pattern="[0-9]*"
                       maxLength={4}
-                      required 
+                      required
                       value={formColumn}
                       onChange={e => {
                         const val = e.target.value.replace(/[^0-9]/g, '');
                         setFormColumn(val);
-                      }} 
+                      }}
                       placeholder="0000"
-                      style={{ 
-                        fontSize: '1.5rem', 
-                        textAlign: 'center', 
+                      style={{
+                        fontSize: '1.5rem',
+                        textAlign: 'center',
                         letterSpacing: '2px',
                         padding: '0.4rem',
                         borderRadius: '12px',
@@ -1524,89 +1789,84 @@ export default function Home() {
                       }}
                     />
                   </div>
-                  
+
                   <div style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.8rem', flexWrap: 'wrap' }}>
                     <div className="form-group" style={{ flex: '2 1 200px', marginBottom: 0 }}>
-                      <label style={{ fontSize: '0.8rem' }}>الموكب / الحسينية / المركز (اختياري)</label>
-                      <textarea 
+                      <label style={{ fontSize: '0.7rem' }}>الموكب / الحسينية (اختياري)</label>
+                      <textarea
                         value={formNames}
-                        onChange={e => setFormNames(e.target.value)} 
+                        onChange={e => setFormNames(e.target.value)}
                         placeholder="(اتركه فارغاً إذا كان نقطة خدمة فردية)"
                         rows={1}
-                        style={{ resize: 'vertical', minHeight: '40px', fontSize: '0.9rem', padding: '0.6rem' }}
+                        style={{ resize: 'vertical', minHeight: '30px', fontSize: '0.8rem', padding: '0.4rem' }}
                       />
                     </div>
                     <div className="form-group" style={{ flex: '1 1 120px', marginBottom: 0 }}>
-                      <label style={{ fontSize: '0.8rem' }}>البلدة (اختياري)</label>
-                      <textarea 
+                      <label style={{ fontSize: '0.7rem' }}>البلدة (اختياري)</label>
+                      <textarea
                         value={formCountry}
-                        onChange={e => setFormCountry(e.target.value)} 
+                        onChange={e => setFormCountry(e.target.value)}
                         placeholder="مثل: البحرين"
                         rows={1}
-                        style={{ resize: 'vertical', minHeight: '40px', fontSize: '0.9rem', padding: '0.6rem' }}
+                        style={{ resize: 'vertical', minHeight: '30px', fontSize: '0.8rem', padding: '0.4rem' }}
                       />
                     </div>
                   </div>
-                  
-                  <div className="form-group">
-                  
-                  {Object.keys(knownServices).map(category => (
-                    <div key={category} style={{ marginBottom: '0.8rem' }}>
-                      <div style={{ fontSize: '0.8rem', color: 'var(--accent-color)', marginBottom: '0.4rem' }}>{category}:</div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                        {knownServices[category].map(srv => (
-                          <button 
-                            type="button" 
-                            key={srv}
-                            onClick={() => handleToggleService(srv)}
-                            style={{
-                              padding: '0.25rem 0.5rem', borderRadius: '15px', border: '1px solid var(--accent-color)',
-                              background: formMoukebServices.includes(srv) ? 'var(--accent-color)' : 'transparent',
-                              color: formMoukebServices.includes(srv) ? 'white' : 'var(--text-color)',
-                              cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.75rem', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '0.3rem'
-                            }}
-                          >
-                            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '12px', height: '12px' }}>{getServiceIcon(srv)}</span>
-                            {srv}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
 
-                  <div style={{ marginTop: '0.8rem', display: 'flex', justifyContent: 'center' }}>
-                    <button 
-                      type="button"
-                      onClick={() => {
-                        const newService = prompt("أدخل اسم الخدمة الجديدة:");
-                        if (newService && newService.trim() !== "") {
-                           const srvName = newService.trim();
-                           setKnownServices(prev => {
-                             const newState = { ...prev };
-                             if (!newState["خدمات مضافة"]) newState["خدمات مضافة"] = [];
-                             if (!newState["خدمات مضافة"].includes(srvName)) {
-                               newState["خدمات مضافة"].push(srvName);
-                             }
-                             return newState;
-                           });
-                           if (!formMoukebServices.includes(srvName)) {
-                             setFormMoukebServices(prev => [...prev, srvName]);
-                           }
-                        }
-                      }}
-                      style={{
-                        padding: '0.4rem 1rem', borderRadius: '20px', border: '1px dashed var(--accent-color)',
-                        background: 'transparent',
-                        color: 'var(--accent-color)',
-                        cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem'
-                      }}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                      إضافة خدمة أخرى
-                    </button>
+                  <div className="form-group">
+                    <label style={{ fontSize: '0.8rem' }}>اختر الخدمات المتوفرة</label>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.8rem' }}>
+                      {allKnownServices.map(srv => (
+                        <button
+                          type="button"
+                          key={srv}
+                          onClick={() => handleToggleService(srv)}
+                          style={{
+                            padding: '0.25rem 0.5rem', borderRadius: '15px', border: '1px solid var(--accent-color)',
+                            background: formMoukebServices.includes(srv) ? 'var(--accent-color)' : 'transparent',
+                            color: formMoukebServices.includes(srv) ? 'white' : 'var(--text-color)',
+                            cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.75rem', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '0.3rem'
+                          }}
+                        >
+                          <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '12px', height: '12px' }}>{getServiceIcon(srv)}</span>
+                          {srv}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div style={{ marginTop: '0.8rem', display: 'flex', justifyContent: 'center' }}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newService = prompt("أدخل اسم الخدمة الجديدة:");
+                          if (newService && newService.trim() !== "") {
+                            const srvName = newService.trim();
+                            setKnownServices(prev => {
+                              const newState = { ...prev };
+                              if (!newState["خدمات مضافة"]) newState["خدمات مضافة"] = [];
+                              if (!newState["خدمات مضافة"].includes(srvName)) {
+                                newState["خدمات مضافة"].push(srvName);
+                              }
+                              return newState;
+                            });
+                            if (!formMoukebServices.includes(srvName)) {
+                              setFormMoukebServices(prev => [...prev, srvName]);
+                            }
+                          }
+                        }}
+                        style={{
+                          padding: '0.4rem 1rem', borderRadius: '20px', border: '1px dashed var(--accent-color)',
+                          background: 'transparent',
+                          color: 'var(--accent-color)',
+                          cursor: 'pointer', fontFamily: 'Cairo', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem'
+                        }}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        إضافة خدمة أخرى
+                      </button>
+                    </div>
                   </div>
-                </div>
-                  
+
                   <div className="form-actions" style={{ display: "flex", flexDirection: "row", gap: "0.8rem", marginTop: "1rem" }}>
                     <button type="submit" className="primary-btn" disabled={isSubmitting} style={{ flex: 2, display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', padding: "0.8rem", fontSize: "1.1rem" }}>
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -1628,7 +1888,7 @@ export default function Home() {
                 <button type="button" className="primary-btn" onClick={() => { setAddStep(1); setIsModalOpen(false); }} style={{ padding: '0.8rem 3rem', width: '100%', maxWidth: '200px' }}>حسناً، إغلاق</button>
               </div>
             )}
-            
+
           </div>
         </div>
       )}
@@ -1640,13 +1900,213 @@ export default function Home() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          padding: 8rem 1rem 3rem;
+          padding: 8rem 1rem 1rem;
         }
         
         :global(.hero-logo) {
           height: 100px;
           margin-bottom: 1rem;
           filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.4));
+        }
+
+        /* Admin Hero Section */
+        .admin-hero-container {
+          text-align: center;
+          margin-bottom: 2rem;
+        }
+        .admin-hero-logo {
+          display: flex;
+          justify-content: center;
+          margin: 0 auto 1rem auto;
+          width: 100px;
+          height: 100px;
+        }
+        .admin-hero-title {
+          color: #ff0000;
+          font-size: 1.2rem !important;
+          margin-bottom: 0.5rem;
+          font-weight: 500 !important;
+        }
+        .admin-hero-text {
+          color: #cccccc;
+          font-size: 0.9rem;
+          line-height: 1.6;
+          max-width: 850px;
+          margin: 0 auto;
+          font-weight: 400;
+        }
+        
+        /* Admin Nav Cards */
+        .admin-cards-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1.5rem;
+          padding: 0 1rem;
+          max-width: 900px;
+          margin: 0 auto 4rem auto;
+        }
+        .admin-nav-card {
+          padding: 2rem;
+          text-align: center;
+          border-radius: 20px;
+          cursor: pointer;
+          transition: all 0.3s;
+          position: relative;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: white;
+        }
+        .admin-nav-card:hover {
+          transform: translateY(-5px);
+          background: rgba(255, 255, 255, 0.1);
+        }
+        .admin-nav-icon {
+          margin-bottom: 1rem;
+          display: flex;
+          justify-content: center;
+        }
+        .admin-nav-card h3 {
+          margin: 0;
+          color: white;
+          font-size: 1.3rem;
+          font-weight: bold;
+        }
+        .admin-nav-card p {
+          color: rgba(255,255,255,0.8);
+          font-size: 0.9rem;
+          margin-top: 0.5rem;
+        }
+        .admin-badge {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          background: #ff0000;
+          color: white;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .admin-sticky-bar {
+          position: sticky;
+          top: 105px;
+          z-index: 50;
+          background: rgba(10, 10, 10, 0.85);
+          backdrop-filter: blur(12px);
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 0.8rem 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          margin: 100px auto 2rem auto;
+          width: 100%;
+          max-width: 900px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+          flex-wrap: wrap;
+        }
+
+        .admin-sticky-bar .admin-glass-tabs {
+          margin: 0;
+          flex: 1;
+          display: flex;
+          justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+          .admin-sticky-bar {
+            top: 95px;
+            padding: 0.5rem;
+            border-radius: 12px;
+            gap: 0.5rem;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+          }
+          .admin-sticky-bar .admin-glass-tabs {
+            margin: 0;
+            flex: 1;
+            display: flex;
+            gap: 0.3rem;
+          }
+          .glass-tab-btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+          }
+          .admin-icon-btn {
+            width: 36px;
+            height: 36px;
+          }
+        }
+        
+        .admin-icon-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background: rgba(255, 255, 255, 0.05);
+          color: white;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.3s;
+          backdrop-filter: blur(10px);
+          flex-shrink: 0;
+        }
+        .admin-icon-btn:hover {
+          background: rgba(255, 0, 85, 0.2);
+          border-color: rgba(255, 0, 85, 0.4);
+          transform: scale(1.05);
+        }
+        .admin-icon-btn.refresh-btn {
+          background: var(--accent-color);
+          border: none;
+          box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+        .admin-icon-btn.refresh-btn:hover {
+          background: #ff0033;
+        }
+
+        .admin-glass-tabs {
+          display: flex;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-bottom: 2rem;
+          flex-wrap: wrap;
+          background: rgba(255, 255, 255, 0.03);
+          padding: 0.5rem;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          width: fit-content;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .glass-tab-btn {
+          background: transparent;
+          color: rgba(255, 255, 255, 0.6);
+          border: none;
+          padding: 0.6rem 1.5rem;
+          border-radius: 12px;
+          font-family: 'Cairo', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+        .glass-tab-btn:hover {
+          color: white;
+          background: rgba(255, 255, 255, 0.05);
+        }
+        .glass-tab-btn.active {
+          background: var(--accent-color);
+          color: white;
+          box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
         }
 
 
@@ -1661,7 +2121,7 @@ export default function Home() {
           font-size: 1.2rem;
           color: var(--text-muted);
           max-width: 600px;
-          margin-bottom: 2.5rem;
+          margin-bottom: 1rem;
         }
 
         /* Header */
@@ -1677,9 +2137,8 @@ export default function Home() {
           transition: all 0.4s ease;
           padding: 1.5rem 2rem;
         }
-        
         .app-header.scrolled {
-          padding: 1rem 2rem;
+          /* No padding change to keep the banner fixed size */
         }
 
         .header-top {
@@ -1724,12 +2183,11 @@ export default function Home() {
         
         /* Footer */
         .app-footer {
-          margin-top: 4rem;
-          padding: 3rem 1rem;
+          margin-top: 1rem;
+          padding: 1rem;
           display: flex;
           flex-direction: column;
           align-items: center;
-          border-top: 1px solid rgba(255,255,255,0.05);
           background: rgba(0,0,0,0.2);
         }
         
@@ -2144,7 +2602,59 @@ export default function Home() {
           font-size: 0.95rem;
         }
         
-        @media (max-width: 500px) {
+        @media (max-width: 768px) {
+          .admin-hero-logo {
+            width: 80px;
+            height: 80px;
+          }
+          .admin-hero-title {
+            font-size: 0.95rem !important;
+            margin-bottom: 0.3rem;
+            font-weight: 500 !important;
+          }
+          .admin-hero-text {
+            font-size: 0.75rem;
+            line-height: 1.4;
+            padding: 0 0.5rem;
+            font-weight: 400;
+          }
+          .admin-cards-container {
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            padding: 0 0.5rem;
+          }
+          .admin-nav-card {
+            padding: 0.8rem 0.5rem;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          .admin-nav-icon svg {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .admin-nav-icon {
+            margin-bottom: 0.4rem;
+          }
+          .admin-nav-card h3 {
+            font-size: 0.8rem;
+          }
+          .admin-nav-card p {
+            display: block;
+            font-size: 0.6rem;
+            margin-top: 0.3rem;
+            line-height: 1.2;
+            opacity: 0.9;
+          }
+          .admin-badge {
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+          }
           .app-header {
             top: 10px;
             left: 10px;
