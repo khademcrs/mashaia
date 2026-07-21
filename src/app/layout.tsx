@@ -12,12 +12,12 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'مشاية',
+  title: 'مَشّاية',
   description: 'منصة تفاعلية لمواكب الأربعين',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
-    title: 'مشاية',
+    title: 'مَشّاية',
     statusBarStyle: 'black-translucent',
   },
 }
@@ -32,7 +32,7 @@ export default function RootLayout({
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
         <link rel="icon" type="image/svg+xml" href="/icon.svg?v=2" />
-        <link rel="apple-touch-icon" href="/icon.svg?v=2" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body>{children}</body>
     </html>
