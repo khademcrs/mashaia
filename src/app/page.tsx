@@ -122,6 +122,7 @@ export default function Home() {
   const [expandedCol, setExpandedCol] = useState<number | null>(null);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
+  const [visitorCount, setVisitorCount] = useState<number | null>(null);
 
 
   const fetchServices = async () => {
@@ -138,6 +139,11 @@ export default function Home() {
   useEffect(() => {
     fetchMoukebs();
     fetchServices();
+    
+    if (!localStorage.getItem('mashaia_visited')) {
+      fetch('https://api.counterapi.dev/v1/mashaia_app/visitors/up').catch(() => {});
+      localStorage.setItem('mashaia_visited', 'true');
+    }
 
     const savedSession = localStorage.getItem("adminSession");
     if (savedSession) {
@@ -145,6 +151,12 @@ export default function Home() {
         const parsed = JSON.parse(savedSession);
         setIsAdmin(true);
         setAdminPassword(parsed.password);
+        if (parsed.password === 'kmnt') {
+          fetch('https://api.counterapi.dev/v1/mashaia_app/visitors')
+            .then(r => r.json())
+            .then(data => setVisitorCount(data.count))
+            .catch(() => {});
+        }
       } catch(e) {}
     }
 
