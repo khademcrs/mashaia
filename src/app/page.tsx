@@ -3,6 +3,7 @@
 import { useEffect, useState, FormEvent } from "react";
 import MashayaLogo from "@/components/MashayaLogo";
 import SecondaryLogo from "@/components/SecondaryLogo";
+import { supabase } from "./lib/supabase";
 
 
 
@@ -123,6 +124,7 @@ export default function Home() {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
   const [visitorCount, setVisitorCount] = useState<number | null>(null);
+  const [onlineUsers, setOnlineUsers] = useState<number>(1);
 
 
   const fetchServices = async () => {
@@ -139,11 +141,27 @@ export default function Home() {
   useEffect(() => {
     fetchMoukebs();
     fetchServices();
-    
-    if (!localStorage.getItem('mashaia_visited')) {
-      fetch('https://api.counterapi.dev/v1/mashaia_app/visitors/up').catch(() => {});
-      localStorage.setItem('mashaia_visited', 'true');
+
+    if (!sessionStorage.getItem('mashaia_visited_session')) {
+      fetch('/api/visitors', { method: 'POST' }).catch(() => {});
+      sessionStorage.setItem('mashaia_visited_session', 'true');
     }
+
+    const roomOne = supabase.channel('online-visitors');
+    roomOne
+      .on('presence', { event: 'sync' }, () => {
+        const newState = roomOne.presenceState();
+        let count = 0;
+        for (let key in newState) {
+          count += newState[key].length;
+        }
+        setOnlineUsers(count || 1);
+      })
+      .subscribe(async (status) => {
+        if (status === 'SUBSCRIBED') {
+          await roomOne.track({ online_at: new Date().toISOString() });
+        }
+      });
 
     const savedSession = localStorage.getItem("adminSession");
     if (savedSession) {
@@ -152,7 +170,7 @@ export default function Home() {
         setIsAdmin(true);
         setAdminPassword(parsed.password);
         if (parsed.password === 'kmnt') {
-          fetch('https://api.counterapi.dev/v1/mashaia_app/visitors')
+          fetch('/api/visitors')
             .then(r => r.json())
             .then(data => setVisitorCount(data.count))
             .catch(() => {});
@@ -257,6 +275,12 @@ export default function Home() {
       setIsAdmin(true);
       setShowLoginModal(false);
       localStorage.setItem("adminSession", JSON.stringify({ password: adminPassword }));
+      if (adminPassword === "kmnt") {
+        fetch('/api/visitors')
+          .then(r => r.json())
+          .then(data => setVisitorCount(data.count))
+          .catch(() => {});
+      }
       alert("تم تسجيل الدخول بنجاح.");
     } else {
       alert("كلمة المرور غير صحيحة.");
@@ -754,6 +778,18 @@ export default function Home() {
               <div className="admin-hero-text">
                 يا خادم الحسين.. دقةُ المراجعةِ جزءٌ من شرفِ الخدمة. دَقِّقْ في مساهماتِ الخدام، واعتمدْ منها ما يُعينُ الزائرَ في مَسيرِه، لتكونَ خُطواتهم في ميزانِ حسناتِك
               </div>
+              {adminPassword === 'kmnt' && visitorCount !== null && (
+                <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0, 255, 0, 0.15)', color: '#00ff00', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 'bold', border: '1px solid rgba(0, 255, 0, 0.3)', fontSize: '1.1rem' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    إجمالي الزيارات: {visitorCount}
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0, 150, 255, 0.15)', color: '#0096ff', padding: '0.8rem 1.5rem', borderRadius: '12px', fontWeight: 'bold', border: '1px solid rgba(0, 150, 255, 0.3)', fontSize: '1.1rem' }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    المتصلون الآن: {onlineUsers}
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <>
